@@ -50,6 +50,7 @@ architecture rtl of converter_fsm_2 is
     -- other
     signal clk_div : std_logic;
     signal internal_clk : std_logic;
+    constant BLOCK_SELECT : integer := 2;
         
 begin
 
@@ -134,31 +135,48 @@ begin
             end case;  
         end process;
 
-
-    -- ipbus_reg_v_inst : entity work.ipbus_reg_v
-    --     generic map (
-    --     N_REG => c_N_REG
-    --     )
-    --     port map (
-    --     clk => i_clk,
-    --     reset => i_reset,
-    --     ipbus_in => wbus_to_reg_v, --wbus
-    --     ipbus_out => rbus_from_reg_v, --rbus
-    --     q => q,
-    --     qmask => qmask,
-    --     stb => stb
-    --     );
-   
-    ipbus_peephole_ram_inst : entity work.ipbus_peephole_ram
-        generic map (
-        ADDR_WIDTH => 3
-        )
-        port map (
-        clk => i_clk,
-        reset => i_reset,
-        ipbus_in => wbus_to_reg_v,
-        ipbus_out => rbus_from_reg_v
-        );
+    mem_sel_1 : if BLOCK_SELECT = 1 generate
+        ipbus_reg_v_inst : entity work.ipbus_reg_v
+            generic map (
+            N_REG => c_N_REG
+            )
+            port map (
+            clk => i_clk,
+            reset => i_reset,
+            ipbus_in => wbus_to_reg_v, --wbus
+            ipbus_out => rbus_from_reg_v, --rbus
+            q => q,
+            qmask => qmask,
+            stb => stb
+            );
+        end generate;
+    
+    mem_sel_2 : if BLOCK_SELECT = 2 generate
+        ipbus_ram_inst : entity work.ipbus_ram
+            generic map (
+            ADDR_WIDTH => 3
+            )
+            port map (
+            clk => i_clk,
+            reset => i_reset,
+            ipbus_in => wbus_to_reg_v,
+            ipbus_out => rbus_from_reg_v
+            );
+        end generate;
+      
+            
+    mem_sel_3 : if BLOCK_SELECT = 3 generate
+        ipbus_peephole_ram_inst : entity work.ipbus_peephole_ram
+            generic map (
+            ADDR_WIDTH => 3
+            )
+            port map (
+            clk => i_clk,
+            reset => i_reset,
+            ipbus_in => wbus_to_reg_v,
+            ipbus_out => rbus_from_reg_v
+            );
+        end generate;
 
     
     write_inst : entity work.write
