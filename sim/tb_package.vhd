@@ -51,3 +51,29 @@ package body tb_package is
         end procedure;
 
 end package body tb_package;
+
+-----------------------------------------------------------------------
+-- file
+-----------------------------------------------------------------------
+        -- file log_file : text open write_mode is "log_output.txt";
+        -- variable log_line : line;
+
+        -- write(log_line, c_DATA_x1); writeline(log_file, log_line);
+        -- write(log_line, c_DATA_x2); writeline(log_file, log_line);
+        -- write(log_line, c_DATA_x3); writeline(log_file, log_line);
+-----------------------------------------------------------------------
+
+        -- write(log_line, c_DATA_x1 & c_DATA_x2 & c_DATA_x3);
+        -- writeline(log_file, log_line);
+
+        -- write(log_line, to_integer(unsigned(c_DATA_x1)));
+        -- write(log_line, string'(" "));
+        -- write(log_line, to_integer(unsigned(c_DATA_x2)));
+        -- write(log_line, string'(" "));
+        -- write(log_line, to_integer(unsigned(c_DATA_x3)));
+        -- writeline(log_file, log_line);
+
+        -- write(log_line, to_integer(unsigned(c_DATA_x1))); writeline(log_file, log_line);
+        -- write(log_line, to_integer(unsigned(c_DATA_x2))); writeline(log_file, log_line);
+        -- write(log_line, to_integer(unsigned(c_DATA_x3))); writeline(log_file, log_line);
+-----------------------------------------------------------------------

@@ -1,8 +1,11 @@
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.NUMERIC_STD.ALL;
+use ieee.std_logic_textio.all;  
+use std.textio.all;             
 use work.m_package.all;
 use work.tb_package.all;
+
 
 entity tb_top_for_sim is
 end;
@@ -32,6 +35,17 @@ architecture bench of tb_top_for_sim is
     signal o_data_snd : std_logic_vector(c_GBT_FRAME_WIDTH-1 downto 0);
     -- rmw
     signal o_wr_data : std_logic_vector(31 downto 0);
+    -- Sim
+    signal MODE : integer := 4;  
+        -- 0 = WRITE, 
+        -- 1 = READ, 
+        -- 4 = RMW_SUM & READ
+        -- 5 = WRITE & READ
+        -- 6 = WRITE & BLOCK_READ_NON_INC
+        -- 7 = WRITE & BLOCK_READ_INC
+    file log_file : text open write_mode is "log_output.txt";
+    signal prev_data : std_logic_vector(c_GBT_FRAME_WIDTH-1 downto 0) := (others => '0');
+    signal prev_data_i_data_rcv: std_logic_vector(c_GBT_FRAME_WIDTH-1 downto 0) := (others => '0');
     
 begin
 
@@ -64,57 +78,172 @@ begin
 p_generate_clock(i_clk_ipbus, c_IPBUS_CLOKC_PERIOD);
 p_generate_clock(i_clk_gbt, c_GBT_CLOCK_PERIOD);
 
-process 
+
+process(i_clk_gbt)
+    variable log_line : line;
 begin
+    if rising_edge(i_clk_gbt) then
+        if o_data_snd /= prev_data then
+            write(log_line, string'("o_data_snd = "));
+            write(log_line, string'("SWT = "));
+            write(log_line, to_integer(unsigned(o_data_snd(79 downto 76))));
+            write(log_line, string'(" NOT_USED = "));
+            write(log_line, to_integer(unsigned(o_data_snd(75 downto 68))));
+            write(log_line, string'(" OP_TYPE = "));
+            write(log_line, to_integer(unsigned(o_data_snd(67 downto 64))));
+            write(log_line, string'(" ADDR = "));
+            write(log_line, to_integer(unsigned(o_data_snd(63 downto 32))));
+            write(log_line, string'(" DATA = "));
+            write(log_line, to_integer(unsigned(o_data_snd(31 downto 0))));
+            writeline(log_file, log_line);
+            write(log_line, string'("  ")); writeline(log_file, log_line);
+        end if;
+
+        prev_data <= o_data_snd;
+    end if;
+end process;
+
+process(i_clk_gbt)
+    variable log_line : line;
+begin
+    if rising_edge(i_clk_gbt) then
+        if i_data_rcv /= prev_data_i_data_rcv then
+            write(log_line, string'("i_data_rcv = "));
+            write(log_line, string'("SWT = "));
+            write(log_line, to_integer(unsigned(i_data_rcv(79 downto 76))));
+            write(log_line, string'(" NOT_USED = "));
+            write(log_line, to_integer(unsigned(i_data_rcv(75 downto 68))));
+            write(log_line, string'(" OP_TYPE = "));
+            write(log_line, to_integer(unsigned(i_data_rcv(67 downto 64))));
+            write(log_line, string'(" ADDR = "));
+            write(log_line, to_integer(unsigned(i_data_rcv(63 downto 32))));
+            write(log_line, string'(" DATA = "));
+            write(log_line, to_integer(unsigned(i_data_rcv(31 downto 0))));
+            writeline(log_file, log_line);
+            write(log_line, string'("  ")); writeline(log_file, log_line);
+            --write(log_line, c_SWT & c_NOT_USED & c_WRITE & c_ADDRESS_x0 & c_DATA_x1); --i_data_rcv);
+            --writeline(log_file, log_line);
+        end if;
+
+        prev_data_i_data_rcv <= i_data_rcv;
+    end if;
+end process;
+
+
+process 
+    variable log_line : line;
+begin
+    write(log_line, string'("Simulation started...")); writeline(log_file, log_line);
     p_init_signals(i_reset);
     p_init_signals(i_data_rcv);
-    p_reset_signal(i_reset,c_IPBUS_CLOKC_PERIOD*5,c_IPBUS_CLOKC_PERIOD*5);
+    p_reset_signal(i_reset,t_ZERO,c_IPBUS_CLOKC_PERIOD*5);
 
-    wait for c_GBT_CLOCK_PERIOD*20;
-    i_data_rcv <= c_SWT & c_NOT_USED & c_WRITE & c_ADDRESS_x0 & c_DATA_x1 ;
-    wait for c_GBT_CLOCK_PERIOD;
-    i_data_rcv <= c_SWT & c_NOT_USED & c_WRITE & c_ADDRESS_x1 & c_DATA_x2 ;
-    wait for c_GBT_CLOCK_PERIOD;
-    i_data_rcv <= c_SWT & c_NOT_USED & c_WRITE & c_ADDRESS_x2 & c_DATA_x3 ;
-    wait for c_GBT_CLOCK_PERIOD;
-    i_data_rcv <= c_IDLE & c_NOT_USED & c_WRITE & c_ADDRESS_x3 & c_DATA_x4 ;
+    if MODE = 0 then -- WRITE
+        wait for c_GBT_CLOCK_PERIOD*20;
+        i_data_rcv <= c_SWT & c_NOT_USED & c_WRITE & c_ADDRESS_x0 & c_DATA_x1 ;
+        wait for c_GBT_CLOCK_PERIOD;
+        i_data_rcv <= c_SWT & c_NOT_USED & c_WRITE & c_ADDRESS_x1 & c_DATA_x2 ;
+        wait for c_GBT_CLOCK_PERIOD;
+        i_data_rcv <= c_SWT & c_NOT_USED & c_WRITE & c_ADDRESS_x2 & c_DATA_x3 ;
+        wait for c_GBT_CLOCK_PERIOD;
+        i_data_rcv <= c_IDLE & c_NOT_USED & c_WRITE & c_ADDRESS_x3 & c_DATA_x4 ;--c_IDLE
+        
+    elsif MODE = 1 then -- READ
+        wait for c_GBT_CLOCK_PERIOD*20;
+        i_data_rcv <= c_SWT & c_NOT_USED & c_READ & c_ADDRESS_x0 & c_DATA_x1 ;
+        wait for c_GBT_CLOCK_PERIOD;
+        i_data_rcv <= c_SWT & c_NOT_USED & c_READ & c_ADDRESS_x1 & c_DATA_x1 ;
+        wait for c_GBT_CLOCK_PERIOD;
+        i_data_rcv <= c_SWT & c_NOT_USED & c_READ & c_ADDRESS_x2 & c_DATA_x1 ;
+        wait for c_GBT_CLOCK_PERIOD;
+        i_data_rcv <= c_IDLE & c_NOT_USED & c_READ & c_ADDRESS_x3 & c_DATA_x1 ;--c_IDLE
+    elsif MODE = 2 then -- BLOCK_READ_NON_INC
+        wait for c_GBT_CLOCK_PERIOD*20;
+        i_data_rcv <= c_SWT & c_NOT_USED & c_BLOCK_READ_NON_INC & c_ADDRESS_x1 & c_DATA_x3 ;
+        wait for c_GBT_CLOCK_PERIOD;
+        i_data_rcv <= c_IDLE & c_NOT_USED & c_READ & c_ADDRESS_x4 & c_DATA_x1 ;--c_IDLE
+    elsif MODE = 3 then -- BLOCK_READ_INC
+        wait for c_GBT_CLOCK_PERIOD*20;
+        i_data_rcv <= c_SWT & c_NOT_USED & c_BLOCK_READ_INC & c_ADDRESS_x1 & c_DATA_x3 ;
+        wait for c_GBT_CLOCK_PERIOD;
+        i_data_rcv <= c_IDLE & c_NOT_USED & c_READ & c_ADDRESS_x4 & c_DATA_x1 ;--c_IDLE
+    elsif MODE = 4 then  -- RMW_SUM & READ
+        wait for c_GBT_CLOCK_PERIOD*40;
+        i_data_rcv <= c_SWT & c_NOT_USED & c_RMW_SUM & c_ADDRESS_x0 & c_DATA_x3;
+        wait for c_GBT_CLOCK_PERIOD;
+        i_data_rcv <= c_IDLE & c_NOT_USED & c_RMW_SUM & c_ADDRESS_x0 & c_DATA_x1; --c_IDLE
 
-    wait for c_GBT_CLOCK_PERIOD*20;
-    i_data_rcv <= c_SWT & c_NOT_USED & c_READ & c_ADDRESS_x1 & c_DATA_x1 ;
-    wait for c_GBT_CLOCK_PERIOD;
-    i_data_rcv <= c_SWT & c_NOT_USED & c_READ & c_ADDRESS_x2 & c_DATA_x1 ;
-    wait for c_GBT_CLOCK_PERIOD;
-    i_data_rcv <= c_SWT & c_NOT_USED & c_READ & c_ADDRESS_x3 & c_DATA_x1 ;
-    wait for c_GBT_CLOCK_PERIOD;
-    i_data_rcv <= c_IDLE & c_NOT_USED & c_READ & c_ADDRESS_x4 & c_DATA_x1 ;
+        wait for c_GBT_CLOCK_PERIOD*40;
+        i_data_rcv <= c_SWT & c_NOT_USED & c_RMW_SUM & c_ADDRESS_x0 & c_DATA_x4;
+        wait for c_GBT_CLOCK_PERIOD;
+        i_data_rcv <= c_IDLE & c_NOT_USED & c_RMW_SUM & c_ADDRESS_x0 & c_DATA_x1; --c_IDLE
 
-    wait for c_GBT_CLOCK_PERIOD*20;
-    i_data_rcv <= c_SWT & c_NOT_USED & c_BLOCK_READ_NON_INC & c_ADDRESS_x1 & c_DATA_x3 ;
-    wait for c_GBT_CLOCK_PERIOD;
-    i_data_rcv <= c_IDLE & c_NOT_USED & c_READ & c_ADDRESS_x4 & c_DATA_x1 ;
+        wait for c_GBT_CLOCK_PERIOD*40;
+        i_data_rcv <= c_SWT & c_NOT_USED & c_RMW_SUM & c_ADDRESS_x0 & c_DATA_x5;
+        wait for c_GBT_CLOCK_PERIOD;
+        i_data_rcv <= c_IDLE & c_NOT_USED & c_RMW_SUM & c_ADDRESS_x0 & c_DATA_x1 ; --c_IDLE
 
-    wait for c_GBT_CLOCK_PERIOD*20;
-    i_data_rcv <= c_SWT & c_NOT_USED & c_BLOCK_READ_INC & c_ADDRESS_x1 & c_DATA_x3 ;
-    wait for c_GBT_CLOCK_PERIOD;
-    i_data_rcv <= c_IDLE & c_NOT_USED & c_READ & c_ADDRESS_x4 & c_DATA_x1 ;
+    elsif MODE = 5 then  -- WRITE & READ
+        wait for c_GBT_CLOCK_PERIOD*20;
+        i_data_rcv <= c_SWT & c_NOT_USED & c_WRITE & c_ADDRESS_x0 & c_DATA_x1 ;
+        wait for c_GBT_CLOCK_PERIOD;
+        i_data_rcv <= c_SWT & c_NOT_USED & c_WRITE & c_ADDRESS_x1 & c_DATA_x2 ;
+        wait for c_GBT_CLOCK_PERIOD;
+        i_data_rcv <= c_SWT & c_NOT_USED & c_WRITE & c_ADDRESS_x2 & c_DATA_x3 ;
+        wait for c_GBT_CLOCK_PERIOD;
+        i_data_rcv <= c_IDLE & c_NOT_USED & c_WRITE & c_ADDRESS_x3 & c_DATA_x4 ; --c_IDLE
+        --
+        wait for c_GBT_CLOCK_PERIOD*20;
+        i_data_rcv <= c_SWT & c_NOT_USED & c_READ & c_ADDRESS_x0 & c_DATA_x1 ;
+        wait for c_GBT_CLOCK_PERIOD;
+        i_data_rcv <= c_SWT & c_NOT_USED & c_READ & c_ADDRESS_x1 & c_DATA_x1 ;
+        wait for c_GBT_CLOCK_PERIOD;
+        i_data_rcv <= c_SWT & c_NOT_USED & c_READ & c_ADDRESS_x2 & c_DATA_x1 ;
+        wait for c_GBT_CLOCK_PERIOD;
+        i_data_rcv <= c_IDLE & c_NOT_USED & c_READ & c_ADDRESS_x3 & c_DATA_x1 ; --c_IDLE
+    elsif MODE = 6 then -- WRITE & BLOCK_READ_NON_INC
+        wait for c_GBT_CLOCK_PERIOD*20;
+        i_data_rcv <= c_SWT & c_NOT_USED & c_WRITE & c_ADDRESS_x0 & c_DATA_x1 ;
+        wait for c_GBT_CLOCK_PERIOD;
+        i_data_rcv <= c_SWT & c_NOT_USED & c_WRITE & c_ADDRESS_x1 & c_DATA_x2 ;
+        wait for c_GBT_CLOCK_PERIOD;
+        i_data_rcv <= c_SWT & c_NOT_USED & c_WRITE & c_ADDRESS_x2 & c_DATA_x3 ;
+        wait for c_GBT_CLOCK_PERIOD;
+        i_data_rcv <= c_IDLE & c_NOT_USED & c_WRITE & c_ADDRESS_x3 & c_DATA_x4 ;--c_IDLE
 
+        wait for c_GBT_CLOCK_PERIOD*20;
+        i_data_rcv <= c_SWT & c_NOT_USED & c_BLOCK_READ_NON_INC & c_ADDRESS_x0 & c_DATA_x3 ;
+        wait for c_GBT_CLOCK_PERIOD;
+        i_data_rcv <= c_IDLE & c_NOT_USED & c_READ & c_ADDRESS_x4 & c_DATA_x1 ;--c_IDLE
+
+    elsif MODE = 7 then -- WRITE & BLOCK_READ_INC
+        wait for c_GBT_CLOCK_PERIOD*20;
+        i_data_rcv <= c_SWT & c_NOT_USED & c_WRITE & c_ADDRESS_x0 & c_DATA_x1 ;
+        wait for c_GBT_CLOCK_PERIOD;
+        i_data_rcv <= c_SWT & c_NOT_USED & c_WRITE & c_ADDRESS_x1 & c_DATA_x2 ;
+        wait for c_GBT_CLOCK_PERIOD;
+        i_data_rcv <= c_SWT & c_NOT_USED & c_WRITE & c_ADDRESS_x2 & c_DATA_x3 ;
+        wait for c_GBT_CLOCK_PERIOD;
+        i_data_rcv <= c_IDLE & c_NOT_USED & c_WRITE & c_ADDRESS_x3 & c_DATA_x4 ;--c_IDLE
+
+        wait for c_GBT_CLOCK_PERIOD*20;
+        i_data_rcv <= c_SWT & c_NOT_USED & c_BLOCK_READ_INC & c_ADDRESS_x0 & c_DATA_x3 ;
+        wait for c_GBT_CLOCK_PERIOD;
+        i_data_rcv <= c_IDLE & c_NOT_USED & c_READ & c_ADDRESS_x4 & c_DATA_x1 ;--c_IDLE
     
-    wait for c_GBT_CLOCK_PERIOD*40;
-    i_data_rcv <= c_SWT & c_NOT_USED & c_RMW_SUM & c_ADDRESS_x1 & c_DATA_x3;
-    wait for c_GBT_CLOCK_PERIOD;
-    i_data_rcv <= c_IDLE & c_NOT_USED & c_READ & c_ADDRESS_x4 & c_DATA_x1;
+    elsif MODE = 8 then -- WRITE & BLOCK_READ_INC
+        wait for c_GBT_CLOCK_PERIOD*20;
+        i_data_rcv <= c_SWT & c_NOT_USED & c_WRITE & c_ADDRESS_x0 & c_DATA_x1 ;
+        wait for c_GBT_CLOCK_PERIOD;
+        i_data_rcv <= c_SWT & c_NOT_USED & c_WRITE & c_ADDRESS_x1 & c_DATA_x2 ;
+        wait for c_GBT_CLOCK_PERIOD;
+        i_data_rcv <= c_SWT & c_NOT_USED & c_WRITE & c_ADDRESS_x2 & c_DATA_x3 ;
+        wait for c_GBT_CLOCK_PERIOD;
+        i_data_rcv <= c_IDLE & c_NOT_USED & c_WRITE & c_ADDRESS_x3 & c_DATA_x4 ;--c_IDLE
 
-    wait for c_GBT_CLOCK_PERIOD*40;
-    i_data_rcv <= c_SWT & c_NOT_USED & c_RMW_SUM & c_ADDRESS_x1 & c_DATA_x4;
-    wait for c_GBT_CLOCK_PERIOD;
-    i_data_rcv <= c_IDLE & c_NOT_USED & c_READ & c_ADDRESS_x4 & c_DATA_x1 ;
 
-    
-    wait for c_GBT_CLOCK_PERIOD*40;
-    i_data_rcv <= c_SWT & c_NOT_USED & c_RMW_SUM & c_ADDRESS_x1 & c_DATA_x5;
-    wait for c_GBT_CLOCK_PERIOD;
-    i_data_rcv <= c_IDLE & c_NOT_USED & c_READ & c_ADDRESS_x4 & c_DATA_x1 ;
 
+    end if;
     wait;
 end process;
 

@@ -82,6 +82,7 @@ package m_package is
     constant c_GBT_CLOCK_PERIOD     : time      := 25 ns; 
     constant c_IPBUS_CLOKC_PERIOD   : time      := 32 ns;
     constant c_N_REG                : integer   := 10; -- ipbus_reg_v
+    constant t_ZERO                 : time      := 0 ns; 
     -----------------
     constant c_GBT_ZERO_FRAME : gbt_frame := (
         swt_id           => (others => '0'),
