@@ -5,17 +5,16 @@ use work.my_package.all;
 
 entity converter is
     port (
-        -- common
         i_clk_ipbus : in std_logic;
         i_clk_gbt : in std_logic;
         i_reset : in std_logic;
         -- recieve_swt 
-        i_data_rcv : in std_logic_vector(c_GBT_FRAME_WIDTH-1 downto 0); -- gbt in
+        i_data_rcv : in std_logic_vector(c_GBT_FRAME_WIDTH-1 downto 0);
         -- send_swt
-        o_data_snd : buffer std_logic_vector(c_GBT_FRAME_WIDTH-1 downto 0); -- gbt in
+        o_data_snd : buffer std_logic_vector(c_GBT_FRAME_WIDTH-1 downto 0);
         -- to pyaload 
-        o_wbus : buffer ipb_wbus; -- ipbus out
-        i_rbus : in ipb_rbus -- ipbus in
+        o_wbus : buffer ipb_wbus;
+        i_rbus : in ipb_rbus
     );
 end entity;
 
@@ -23,20 +22,20 @@ architecture rtl of converter is
 
     -- receive_swt_inst out signals
     signal data_rcv : std_logic_vector(c_GBT_FRAME_WIDTH-1 downto 0);
-    signal wr_en_rcv : std_logic;
+    signal wr_en_rcv : std_logic := '0';
     -- send_swt_inst out signals
     -- asynchronous_fifo_recieve_inst out signals
     signal data_f_r : std_logic_vector(c_GBT_FRAME_WIDTH-1 downto 0);
-    signal full_f_r : std_logic;
-    signal empt_f_r, d_empt_f_r : std_logic;
+    signal full_f_r : std_logic := '0';
+    signal empt_f_r, d_empt_f_r : std_logic := '0';
     -- asynchronous_fifo_send_inst out signals
     signal data_f_s : std_logic_vector(c_GBT_FRAME_WIDTH-1 downto 0);
-    signal full_f_s : std_logic;
-    signal empt_f_s : std_logic;
+    signal full_f_s : std_logic := '0';
+    signal empt_f_s : std_logic := '0';
     -- converter_fsm_inst out signals
     signal data_gbt : std_logic_vector(c_GBT_FRAME_WIDTH-1 downto 0);
-    signal rd_en : std_logic; 
-    signal ack_and : std_logic; 
+    signal rd_en : std_logic := '0';
+    signal ack_and : std_logic := '0';
 
 begin
     -- swt inst
@@ -93,7 +92,7 @@ begin
         o_full => full_f_s, 
         o_empty => empt_f_s 
         );
-
+    -- converter_inst
     delay_signal(i_clk_ipbus, empt_f_r, d_empt_f_r);
     converter_fsm_inst : entity work.converter_fsm
         port map (

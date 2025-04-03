@@ -1,6 +1,6 @@
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
-use work.m_package.all;
+use work.my_package.all;
 
 
 entity send_swt is

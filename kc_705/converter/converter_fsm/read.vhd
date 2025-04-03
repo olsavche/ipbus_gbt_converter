@@ -1,7 +1,7 @@
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
-use work.m_package.all;
+use work.my_package.all;
 use work.tb_package.all;
 
 entity read is

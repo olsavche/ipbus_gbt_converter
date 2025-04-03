@@ -14,7 +14,7 @@ entity converter_fsm is
         i_data_gbt : in std_logic_vector(c_GBT_FRAME_WIDTH-1 downto 0);
         -- fifo 
         o_rd_en :out STD_LOGIC;
-        o_ack_and : out STD_LOGIC;
+        o_ack_and : buffer STD_LOGIC;
         o_data_gbt : out std_logic_vector(c_GBT_FRAME_WIDTH-1 downto 0);
         -- ipbus mem
         o_wbus : out ipb_wbus;
@@ -87,7 +87,7 @@ begin
             if rising_edge(i_clk) then
                 case state is
                     when t_IDEL =>              o_rd_en <= '0';
-                                                clk_div2(i_reset,'0',internal_clk,clk_div);
+                                                --clk_div2(i_reset,'0',internal_clk,clk_div);
                     when t_SEND_RD_EN =>        o_rd_en <= '1';
                     when t_WAIT =>              o_rd_en <= '0';
                     when t_DATA =>          
@@ -108,7 +108,7 @@ begin
                                                     when others =>                  start  <= (others => '0') ;
                                                 end case;   
                     when t_WAIT_2 =>            start  <= int_to_vector(0,c_N_TYPE);
-                                                clk_div2(i_reset,'1',internal_clk,clk_div);
+                                                --clk_div2(i_reset,'1',internal_clk,clk_div);
                     when others =>              null;
                 end case;
                 
@@ -128,19 +128,6 @@ begin
                 when others =>                  set_wbus(wbus_to_reg_v,(others => '0'),(others => '0'),'0','0');
             end case;  
         end process;
-
-    
-    -- ipbus_ram_inst : entity work.ipbus_ram
-    --         generic map (
-    --         ADDR_WIDTH => 3
-    --         )
-    --         port map (
-    --         clk => i_clk,
-    --         reset => i_reset,
-    --         ipbus_in => wbus_to_reg_v,
-    --         ipbus_out => rbus_from_reg_v
-    --         );
-    --     end generate;
     
     write_inst : entity work.write
         port map (
@@ -206,12 +193,14 @@ begin
         s_done <= done(0) or done(1) or done(2) or done(3) or done(4); ----------------------------------!!!!!!!!!!!!!!!!!!!!!!!!!
         o_ack_and <= '0'    when    (gbt_data.transaction_type = c_WRITE or 
                                     wbus_array(4).ipb_write = '1' ) 
-                            else    (clk_div AND rbus_from_reg_v.ipb_ack); --o_ack_and <= clk_div AND rbus_from_reg_v.ipb_ack; 
+                            else    --(clk_div AND rbus_from_reg_v.ipb_ack); 
+                                    rbus_from_reg_v.ipb_ack; 
+                                    --o_ack_and <= clk_div AND rbus_from_reg_v.ipb_ack; 
 
         unpack_rbus(rbus_from_reg_v,rbus_data,rbus_ack,rbus_err);
         o_data_gbt <= gbt_data.swt_id & gbt_data.not_used & gbt_data.transaction_type & gbt_data.address & rbus_data;
         --
-        o_wbus <= wbus_to_reg_v; -- OK
+        o_wbus <= wbus_to_reg_v;
         rbus_from_reg_v <= i_rbus; 
 
 

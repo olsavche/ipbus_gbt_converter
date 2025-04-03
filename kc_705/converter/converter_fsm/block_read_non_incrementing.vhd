@@ -1,7 +1,7 @@
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.NUMERIC_STD.ALL;
-use work.m_package.all;
+use work.my_package.all;
 
 entity block_read_non_incrementing is
     Port (
@@ -32,7 +32,7 @@ begin
             strobe         <= '0';
             done_reg       <= '0';
         elsif rising_edge(i_clk) then
-            -- Импульс done на один такт
+            -- Импуль�? done на один такт
             if done_reg = '1' then
                 done_reg <= '0';
             end if;
