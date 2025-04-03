@@ -1,15 +1,16 @@
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 use work.my_package.all;
+use work.ipbus.all;
 
 
 entity receive_swt is
     port (
-        i_clock           : in    std_logic;
-        i_reset             : in    std_logic;
-        i_data_r            : in    std_logic_vector(C_GBT_FRAME_WIDTH-1 downto 0); -- ctf -> cru to fifo
-        o_data             : out   std_logic_vector(C_GBT_FRAME_WIDTH-1 downto 0); 
-        o_w_en_r            : out   std_logic
+        i_clock : in std_logic;
+        i_reset : in std_logic;
+        i_data_r : in std_logic_vector(C_GBT_FRAME_WIDTH-1 downto 0);
+        o_data : out std_logic_vector(C_GBT_FRAME_WIDTH-1 downto 0); 
+        o_w_en_r : out std_logic
     );
 end entity;
 

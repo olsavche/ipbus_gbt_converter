@@ -1,12 +1,12 @@
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
---use work.ipbus.all;
+use work.ipbus.all;
 use work.my_package.all;
 use work.tb_package.all;
 
 -- sel 0  -> ipbus 
--- sel 1  -> ipbus <-> gbt
+-- sel 1  -> gbt
 
 entity mux is
     generic (
@@ -25,7 +25,7 @@ entity mux is
         -- clk and sel 
             i_reset         : in std_logic;
             i_ipb_clk       : in std_logic;
-            i_sel           : in std_logic
+            i_sel           : in std_logic_vector(0 downto 0)
         );
 end entity;
 
@@ -42,7 +42,7 @@ begin
                     o_wbus_mem  <= ipb_wbus_zero;
                     o_rbus_kc705  <= ipb_rbus_zero;
                     o_rbus_converter   <= ipb_rbus_zero;
-                elsif i_sel = '0' then
+                elsif i_sel = "0" then
                     o_wbus_mem  <= i_wbus_kc705;
                     o_rbus_kc705  <= i_rbus_mem;
                     o_rbus_converter   <= ipb_rbus_zero;
@@ -56,9 +56,9 @@ begin
     end generate;
 
     gen_async : if not USE_CLK generate
-        process(all)--(i_sel, i_wbus_kc705, i_rbus_mem, i_wbus_converter)
+        process(all)
         begin
-                if i_sel = '0' then
+                if i_sel = "0" then
                     o_wbus_mem  <= i_wbus_kc705;
                     o_rbus_kc705  <= i_rbus_mem;
                     o_rbus_converter   <= ipb_rbus_zero;

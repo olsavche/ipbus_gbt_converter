@@ -4,6 +4,7 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.NUMERIC_STD.ALL;
 use work.my_package.all;
+use work.ipbus.all;
 
 entity block_read_incrementing is
     Port (
@@ -34,7 +35,6 @@ begin
             strobe         <= '0';
             done_reg       <= '0';
         elsif rising_edge(i_clk) then
-            -- Сбро�? done_reg через 1 такт
             if done_reg = '1' then
                 done_reg <= '0';
             end if;

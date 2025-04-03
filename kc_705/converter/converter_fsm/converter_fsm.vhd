@@ -3,6 +3,7 @@ use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.NUMERIC_STD.ALL;
 use work.my_package.all;
 use work.ipbus_reg_types.all;
+use work.ipbus.all;
 
 entity converter_fsm is
     port (

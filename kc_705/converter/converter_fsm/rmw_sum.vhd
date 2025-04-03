@@ -3,6 +3,7 @@ use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 use work.my_package.all;
 use work.tb_package.all;
+use work.ipbus.all;
 
 entity rmw_sum is
     port (

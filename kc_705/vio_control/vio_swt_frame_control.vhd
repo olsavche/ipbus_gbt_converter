@@ -29,33 +29,34 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 use work.my_package.all;
+use work.ipbus.all;
 
 
 entity vio_swt_frane_control is
     Port (
         i_clk : in  STD_LOGIC; 
         i_reset : in  STD_LOGIC;
-        i_sel : in  STD_LOGIC;
-        i_send_button : in STD_LOGIC;
+        i_sel : in  STD_LOGIC_VECTOR(0 downto 0);
+        i_send_button : in STD_LOGIC_VECTOR(0 downto 0);
         i_data : in STD_LOGIC_VECTOR(31 downto 0);
         i_adress : in STD_LOGIC_VECTOR(31 downto 0);
         i_tran_type : in STD_LOGIC_VECTOR(3 downto 0);
         o_swt_frame : out STD_LOGIC_VECTOR(79 downto 0);
-        o_sel : out  STD_LOGIC
+        o_sel : out  STD_LOGIC_VECTOR(0 downto 0)
     );
 end vio_swt_frane_control;
 
 architecture Behavioral of vio_swt_frane_control is
-    signal send_button : STD_LOGIC := '0';
+    signal send_button : STD_LOGIC_VECTOR(0 downto 0) := "0";
 begin
 
     process(i_clk)
     begin
         if i_reset = '1' then
-            send_button <= '0';
+            send_button <= "0";
             o_swt_frame <= c_WHOLE_FRAME_ZERO;
         elsif rising_edge(i_clk) then
-            if send_button = '0' and i_send_button = '1' then
+            if send_button = "0" and i_send_button = "1" then
                 o_swt_frame <=  c_SWT & c_NOT_USED & i_tran_type & i_adress & i_data;  
             else
                 o_swt_frame <= c_WHOLE_FRAME_ZERO; 

@@ -35,7 +35,6 @@
 library IEEE;
 use IEEE.STD_LOGIC_1164.all;
 
-
 use work.ipbus.all;
 use work.my_package.all;
 
@@ -70,10 +69,38 @@ architecture rtl of top is
     signal ipb_out : ipb_wbus;
     signal ipb_in : ipb_rbus; 
     -- my signals
-    signal clk_125, clk_40, sel  : std_logic;
+    signal clk_125, clk_40  : std_logic;
     signal converter_rbus, rbus_mux_mem : ipb_rbus;
     signal converter_wbus, wbus_mux_mem : ipb_wbus;
     signal data_rcv, data_snd : std_logic_vector(c_GBT_FRAME_WIDTH-1 downto 0);
+    signal sel : std_logic_vector(0 downto 0);
+    -- vio
+    signal probe_sel : std_logic_vector(0 downto 0);
+    signal probe_send_button : std_logic_vector(0 downto 0);
+    signal probe_data : std_logic_vector(31 downto 0);
+    signal probe_adress : std_logic_vector(31 downto 0);
+    signal probe_tran_type : std_logic_vector(3 downto 0);
+
+    attribute MARK_DEBUG : string;
+    attribute MARK_DEBUG of data_rcv, data_snd : signal is "TRUE";
+
+    
+    COMPONENT clk_wiz_0
+        port(
+        clk_out1          : out    std_logic;
+        reset             : in     std_logic;
+        clk_in1           : in     std_logic);
+        end COMPONENT;
+
+    COMPONENT vio_0
+        PORT (
+        clk : IN STD_LOGIC;
+        probe_out0 : OUT STD_LOGIC_VECTOR(0 DOWNTO 0);
+        probe_out1 : OUT STD_LOGIC_VECTOR(0 DOWNTO 0);
+        probe_out2 : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
+        probe_out3 : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
+        probe_out4 : OUT STD_LOGIC_VECTOR(3 DOWNTO 0));
+        END COMPONENT;
 
 begin
 
@@ -122,49 +149,74 @@ begin
 
     payload : entity work.payload
         port map(
-            ipb_clk  => clk_ipb,
-            ipb_rst  => rst_ipb,
-            ipb_in   => wbus_mux_mem, -- from mux
-            ipb_out  => rbus_mux_mem, -- from mux
-            clk      => clk_aux,
-            rst      => rst_aux,
-            nuke     => nuke,
-            soft_rst => soft_rst,
-            userled  => userled
-            );
+        ipb_clk  => clk_ipb,
+        ipb_rst  => rst_ipb,
+        ipb_in   => wbus_mux_mem, -- from mux
+        ipb_out  => rbus_mux_mem, -- from mux
+        clk      => clk_aux,
+        rst      => rst_aux,
+        nuke     => nuke,
+        soft_rst => soft_rst,
+        userled  => userled
+        );
 
     clk_wiz_0_inst : clk_wiz_0
         port map ( 
-            clk_out1 => clk_40,
-            reset => '0',
-            clk_in1 => clk_125
-          );
+        clk_out1 => clk_40,
+        reset => '0',
+        clk_in1 => clk_125
+        );
+        
+    vio_0_inst : vio_0
+        PORT MAP (
+        clk => clk_40,
+        probe_out0 => probe_sel,
+        probe_out1 => probe_send_button,
+        probe_out2 => probe_data,
+        probe_out3 => probe_adress,
+        probe_out4 => probe_tran_type);
+
+
     
     mux_inst : entity work.mux
         generic map (
-            USE_CLK => false
+        USE_CLK => false
         )
         port map (
-            i_wbus_kc705 => ipb_out,
-            o_rbus_kc705 => ipb_in,
-            o_wbus_mem => wbus_mux_mem,
-            i_rbus_mem => rbus_mux_mem,
-            i_wbus_converter => converter_wbus,
-            o_rbus_converter => converter_rbus,
-            i_reset => '0',
-            i_ipb_clk => clk_ipb,
-            i_sel => sel
+        i_wbus_kc705 => ipb_out,
+        o_rbus_kc705 => ipb_in,
+        o_wbus_mem => wbus_mux_mem,
+        i_rbus_mem => rbus_mux_mem,
+        i_wbus_converter => converter_wbus,
+        o_rbus_converter => converter_rbus,
+        i_reset => '0',
+        i_ipb_clk => clk_ipb,
+        i_sel => sel
         );
 
     converter_inst : entity work.converter
         port map (
-            i_clk_ipbus => clk_ipb,
-            i_clk_gbt => clk_40,
-            i_reset =>  '0',
-            i_data_rcv => data_rcv, -- 
-            o_data_snd => data_snd, -- 
-            o_wbus => converter_wbus, -- mux 
-            i_rbus => converter_rbus -- mux 
-            );
+        i_clk_ipbus => clk_ipb,
+        i_clk_gbt => clk_40,
+        i_reset =>  '0',
+        i_data_rcv => data_rcv, -- 
+        o_data_snd => data_snd, -- 
+        o_wbus => converter_wbus, -- mux 
+        i_rbus => converter_rbus -- mux 
+        );
+
+    vio_swt_frane_control_inst : entity work.vio_swt_frane_control
+        port map (
+        i_clk => clk_40,
+        i_reset => '0',
+        i_sel => probe_sel, -- VIO
+        i_send_button => probe_send_button, -- VIO
+        i_data => probe_data, -- VIO
+        i_adress => probe_adress, -- VIO
+        i_tran_type => probe_tran_type, -- VIO
+        o_swt_frame => data_rcv,
+        o_sel => sel
+        );
+        
 
 end rtl;
