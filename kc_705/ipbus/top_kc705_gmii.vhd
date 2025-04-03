@@ -37,6 +37,7 @@ use IEEE.STD_LOGIC_1164.all;
 
 
 use work.ipbus.all;
+use work.my_package.all;
 
 entity top is generic (
 	ENABLE_DHCP  : std_logic := '0'; -- Default is build with support for RARP rather than DHCP
@@ -64,14 +65,15 @@ end top;
 architecture rtl of top is
 
     signal clk_ipb, rst_ipb, clk_aux, rst_aux, nuke, soft_rst, phy_rst_e, userled : std_logic;
-    signal mac_addr                                                               : std_logic_vector(47 downto 0);
-    signal ip_addr                                                                : std_logic_vector(31 downto 0);
-    signal ipb_out                                                                : ipb_wbus;
-    signal ipb_in                                                                 : ipb_rbus;
+    signal mac_addr : std_logic_vector(47 downto 0);
+    signal ip_addr : std_logic_vector(31 downto 0);
+    signal ipb_out : ipb_wbus;
+    signal ipb_in : ipb_rbus; 
     -- my signals
-    signal clk_125, clk_40  : std_logic;
-    signal converter_rbus : ipb_rbus;
-    signal converter_wbus : ipb_wbus;
+    signal clk_125, clk_40, sel  : std_logic;
+    signal converter_rbus, rbus_mux_mem : ipb_rbus;
+    signal converter_wbus, wbus_mux_mem : ipb_wbus;
+    signal data_rcv, data_snd : std_logic_vector(c_GBT_FRAME_WIDTH-1 downto 0);
 
 begin
 
@@ -122,8 +124,8 @@ begin
         port map(
             ipb_clk  => clk_ipb,
             ipb_rst  => rst_ipb,
-            ipb_in   => ipb_out,
-            ipb_out  => ipb_in,
+            ipb_in   => wbus_mux_mem, -- from mux
+            ipb_out  => rbus_mux_mem, -- from mux
             clk      => clk_aux,
             rst      => rst_aux,
             nuke     => nuke,
@@ -137,18 +139,32 @@ begin
             reset => '0',
             clk_in1 => clk_125
           );
+    
+    mux_inst : entity work.mux
+        generic map (
+            USE_CLK => false
+        )
+        port map (
+            i_wbus_kc705 => ipb_out,
+            o_rbus_kc705 => ipb_in,
+            o_wbus_mem => wbus_mux_mem,
+            i_rbus_mem => rbus_mux_mem,
+            i_wbus_converter => converter_wbus,
+            o_rbus_converter => converter_rbus,
+            i_reset => '0',
+            i_ipb_clk => clk_ipb,
+            i_sel => sel
+        );
 
     converter_inst : entity work.converter
         port map (
             i_clk_ipbus => clk_ipb,
             i_clk_gbt => clk_40,
             i_reset =>  '0',
-            i_data_rcv => , -- 
-            o_data_snd => , -- 
+            i_data_rcv => data_rcv, -- 
+            o_data_snd => data_snd, -- 
             o_wbus => converter_wbus, -- mux 
             i_rbus => converter_rbus -- mux 
             );
-            
-
 
 end rtl;
