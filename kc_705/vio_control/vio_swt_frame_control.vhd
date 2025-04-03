@@ -65,9 +65,7 @@ begin
     end process;
 
     o_sel <= i_sel;
-
+    
 end Behavioral;
-
-
 
 

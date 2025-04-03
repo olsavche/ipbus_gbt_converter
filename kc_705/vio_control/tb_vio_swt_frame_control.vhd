@@ -40,7 +40,7 @@ vio_swt_frane_control_inst : entity work.vio_swt_frane_control
     o_sel => o_sel
     );
 
-p_generate_clock(i_clk, c_IPBUS_CLOKC_PERIOD);
+p_generate_clock(i_clk, c_GBT_CLOCK_PERIOD);
 
 process
     begin
@@ -50,20 +50,20 @@ process
             p_init_signals(i_data);
             p_init_signals(i_adress);
             p_init_signals(i_tran_type);
-            p_reset_signal(i_reset,c_IPBUS_CLOKC_PERIOD*5,c_IPBUS_CLOKC_PERIOD*5);
-        wait for c_IPBUS_CLOKC_PERIOD*5;
+            p_reset_signal(i_reset,c_GBT_CLOCK_PERIOD*5,c_GBT_CLOCK_PERIOD*5);
+        wait for c_GBT_CLOCK_PERIOD*5;
             i_send_button  <= '1';
             i_data  <= int_to_vector(55,32);
             i_adress  <= int_to_vector(24,32);
             i_tran_type  <= int_to_vector(4,4);
-        wait for c_IPBUS_CLOKC_PERIOD*5;
+        wait for c_GBT_CLOCK_PERIOD*5;
             i_send_button  <= '0';
-        wait for c_IPBUS_CLOKC_PERIOD*5;
+        wait for c_GBT_CLOCK_PERIOD*5;
             i_send_button  <= '1';
             i_data  <= int_to_vector(22,32);
             i_adress  <= int_to_vector(33,32);
             i_tran_type  <= int_to_vector(9,4);
-        wait for c_IPBUS_CLOKC_PERIOD*5;
+        wait for c_GBT_CLOCK_PERIOD*5;
             i_send_button  <= '0';
 
 
