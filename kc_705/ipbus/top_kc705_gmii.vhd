@@ -35,6 +35,7 @@
 library IEEE;
 use IEEE.STD_LOGIC_1164.all;
 
+
 use work.ipbus.all;
 
 entity top is generic (
@@ -67,6 +68,10 @@ architecture rtl of top is
     signal ip_addr                                                                : std_logic_vector(31 downto 0);
     signal ipb_out                                                                : ipb_wbus;
     signal ipb_in                                                                 : ipb_rbus;
+    -- my signals
+    signal clk_125, clk_40  : std_logic;
+    signal converter_rbus : ipb_rbus;
+    signal converter_wbus : ipb_wbus;
 
 begin
 
@@ -99,8 +104,9 @@ begin
             ip_addr      => ip_addr,
             ipam_select  => USE_IPAM,
             ipb_in       => ipb_in,
-            ipb_out      => ipb_out
-            );
+            ipb_out      => ipb_out,
+            clk_125_o    => clk_125
+            ); 
 
     leds(3 downto 2) <= '0' & userled;
     phy_rst          <= not phy_rst_e;
@@ -124,5 +130,25 @@ begin
             soft_rst => soft_rst,
             userled  => userled
             );
+
+    clk_wiz_0_inst : clk_wiz_0
+        port map ( 
+            clk_out1 => clk_40,
+            reset => '0',
+            clk_in1 => clk_125
+          );
+
+    converter_inst : entity work.converter
+        port map (
+            i_clk_ipbus => clk_ipb,
+            i_clk_gbt => clk_40,
+            i_reset =>  '0',
+            i_data_rcv => , -- 
+            o_data_snd => , -- 
+            o_wbus => converter_wbus, -- mux 
+            i_rbus => converter_rbus -- mux 
+            );
+            
+
 
 end rtl;

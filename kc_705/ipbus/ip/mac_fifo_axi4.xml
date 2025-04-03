@@ -1,0 +1,1607 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<spirit:component xmlns:xilinx="http://www.xilinx.com" xmlns:spirit="http://www.spiritconsortium.org/XMLSchema/SPIRIT/1685-2009" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <spirit:vendor>unknown</spirit:vendor>
+  <spirit:library>customized_ip</spirit:library>
+  <spirit:name>mac_fifo_axi4</spirit:name>
+  <spirit:version>1.0</spirit:version>
+  <spirit:busInterfaces>
+    <spirit:busInterface>
+      <spirit:name>CORE_CLK</spirit:name>
+      <spirit:busType spirit:vendor="" spirit:library="" spirit:name="" spirit:version=""/>
+      <spirit:slave/>
+      <spirit:parameters>
+        <spirit:parameter>
+          <spirit:name>FREQ_HZ</spirit:name>
+          <spirit:value spirit:resolve="generated" spirit:id="BUSIFPARAM_VALUE.CORE_CLK.FREQ_HZ">100000000</spirit:value>
+        </spirit:parameter>
+      </spirit:parameters>
+    </spirit:busInterface>
+    <spirit:busInterface>
+      <spirit:name>MASTER_ACLK</spirit:name>
+      <spirit:busType spirit:vendor="" spirit:library="" spirit:name="" spirit:version=""/>
+      <spirit:slave/>
+      <spirit:parameters>
+        <spirit:parameter>
+          <spirit:name>FREQ_HZ</spirit:name>
+          <spirit:value spirit:resolve="generated" spirit:id="BUSIFPARAM_VALUE.MASTER_ACLK.FREQ_HZ">100000000</spirit:value>
+        </spirit:parameter>
+      </spirit:parameters>
+    </spirit:busInterface>
+    <spirit:busInterface>
+      <spirit:name>READ_CLK</spirit:name>
+      <spirit:busType spirit:vendor="" spirit:library="" spirit:name="" spirit:version=""/>
+      <spirit:slave/>
+      <spirit:parameters>
+        <spirit:parameter>
+          <spirit:name>FREQ_HZ</spirit:name>
+          <spirit:value spirit:resolve="generated" spirit:id="BUSIFPARAM_VALUE.READ_CLK.FREQ_HZ">100000000</spirit:value>
+        </spirit:parameter>
+      </spirit:parameters>
+    </spirit:busInterface>
+    <spirit:busInterface>
+      <spirit:name>SLAVE_ACLK</spirit:name>
+      <spirit:busType spirit:vendor="" spirit:library="" spirit:name="" spirit:version=""/>
+      <spirit:slave/>
+      <spirit:parameters>
+        <spirit:parameter>
+          <spirit:name>FREQ_HZ</spirit:name>
+          <spirit:value spirit:resolve="generated" spirit:id="BUSIFPARAM_VALUE.SLAVE_ACLK.FREQ_HZ">100000000</spirit:value>
+        </spirit:parameter>
+      </spirit:parameters>
+    </spirit:busInterface>
+    <spirit:busInterface>
+      <spirit:name>WRITE_CLK</spirit:name>
+      <spirit:busType spirit:vendor="" spirit:library="" spirit:name="" spirit:version=""/>
+      <spirit:slave/>
+      <spirit:parameters>
+        <spirit:parameter>
+          <spirit:name>FREQ_HZ</spirit:name>
+          <spirit:value spirit:resolve="generated" spirit:id="BUSIFPARAM_VALUE.WRITE_CLK.FREQ_HZ">100000000</spirit:value>
+        </spirit:parameter>
+      </spirit:parameters>
+    </spirit:busInterface>
+  </spirit:busInterfaces>
+  <spirit:model>
+    <spirit:views>
+      <spirit:view>
+        <spirit:name>xilinx_externalfiles</spirit:name>
+        <spirit:displayName>External Files</spirit:displayName>
+        <spirit:envIdentifier>:vivado.xilinx.com:external.files</spirit:envIdentifier>
+        <spirit:fileSetRef>
+          <spirit:localName>xilinx_externalfiles_view_fileset</spirit:localName>
+        </spirit:fileSetRef>
+        <spirit:parameters>
+          <spirit:parameter>
+            <spirit:name>outputProductCRC</spirit:name>
+            <spirit:value>9:34fb771a</spirit:value>
+          </spirit:parameter>
+        </spirit:parameters>
+      </spirit:view>
+    </spirit:views>
+    <spirit:modelParameters>
+      <spirit:modelParameter xsi:type="spirit:nameValueTypeType">
+        <spirit:name>C_ADD_NGC_CONSTRAINT</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_ADD_NGC_CONSTRAINT">0</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_APPLICATION_TYPE_AXIS</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_APPLICATION_TYPE_AXIS">0</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_APPLICATION_TYPE_RACH</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_APPLICATION_TYPE_RACH">0</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_APPLICATION_TYPE_RDCH</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_APPLICATION_TYPE_RDCH">0</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_APPLICATION_TYPE_WACH</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_APPLICATION_TYPE_WACH">0</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_APPLICATION_TYPE_WDCH</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_APPLICATION_TYPE_WDCH">0</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_APPLICATION_TYPE_WRCH</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_APPLICATION_TYPE_WRCH">0</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_AXIS_TDATA_WIDTH</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_AXIS_TDATA_WIDTH">8</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_AXIS_TDEST_WIDTH</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_AXIS_TDEST_WIDTH">1</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_AXIS_TID_WIDTH</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_AXIS_TID_WIDTH">1</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_AXIS_TKEEP_WIDTH</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_AXIS_TKEEP_WIDTH">1</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_AXIS_TSTRB_WIDTH</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_AXIS_TSTRB_WIDTH">1</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_AXIS_TUSER_WIDTH</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_AXIS_TUSER_WIDTH">1</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_AXIS_TYPE</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_AXIS_TYPE">0</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_AXI_ADDR_WIDTH</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_AXI_ADDR_WIDTH">32</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_AXI_ARUSER_WIDTH</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_AXI_ARUSER_WIDTH">1</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_AXI_AWUSER_WIDTH</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_AXI_AWUSER_WIDTH">1</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_AXI_BUSER_WIDTH</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_AXI_BUSER_WIDTH">1</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_AXI_DATA_WIDTH</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_AXI_DATA_WIDTH">64</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_AXI_ID_WIDTH</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_AXI_ID_WIDTH">1</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_AXI_LEN_WIDTH</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_AXI_LEN_WIDTH">8</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_AXI_LOCK_WIDTH</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_AXI_LOCK_WIDTH">1</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_AXI_RUSER_WIDTH</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_AXI_RUSER_WIDTH">1</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_AXI_TYPE</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_AXI_TYPE">1</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_AXI_WUSER_WIDTH</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_AXI_WUSER_WIDTH">1</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_COMMON_CLOCK</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_COMMON_CLOCK">0</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_COUNT_TYPE</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_COUNT_TYPE">0</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_DATA_COUNT_WIDTH</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_DATA_COUNT_WIDTH">10</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_DEFAULT_VALUE</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_DEFAULT_VALUE">BlankString</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_DIN_WIDTH</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_DIN_WIDTH">18</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_DIN_WIDTH_AXIS</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_DIN_WIDTH_AXIS">10</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_DIN_WIDTH_RACH</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_DIN_WIDTH_RACH">32</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_DIN_WIDTH_RDCH</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_DIN_WIDTH_RDCH">64</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_DIN_WIDTH_WACH</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_DIN_WIDTH_WACH">32</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_DIN_WIDTH_WDCH</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_DIN_WIDTH_WDCH">64</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_DIN_WIDTH_WRCH</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_DIN_WIDTH_WRCH">2</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_DOUT_RST_VAL</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_DOUT_RST_VAL">0</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_DOUT_WIDTH</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_DOUT_WIDTH">18</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_ENABLE_RLOCS</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_ENABLE_RLOCS">0</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_ENABLE_RST_SYNC</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_ENABLE_RST_SYNC">1</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_ERROR_INJECTION_TYPE</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_ERROR_INJECTION_TYPE">0</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_ERROR_INJECTION_TYPE_AXIS</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_ERROR_INJECTION_TYPE_AXIS">0</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_ERROR_INJECTION_TYPE_RACH</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_ERROR_INJECTION_TYPE_RACH">0</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_ERROR_INJECTION_TYPE_RDCH</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_ERROR_INJECTION_TYPE_RDCH">0</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_ERROR_INJECTION_TYPE_WACH</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_ERROR_INJECTION_TYPE_WACH">0</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_ERROR_INJECTION_TYPE_WDCH</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_ERROR_INJECTION_TYPE_WDCH">0</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_ERROR_INJECTION_TYPE_WRCH</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_ERROR_INJECTION_TYPE_WRCH">0</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_FAMILY</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_FAMILY">kintex7</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_FULL_FLAGS_RST_VAL</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_FULL_FLAGS_RST_VAL">1</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_HAS_ALMOST_EMPTY</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_HAS_ALMOST_EMPTY">0</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_HAS_ALMOST_FULL</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_HAS_ALMOST_FULL">0</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_HAS_AXIS_TDATA</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_HAS_AXIS_TDATA">1</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_HAS_AXIS_TDEST</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_HAS_AXIS_TDEST">0</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_HAS_AXIS_TID</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_HAS_AXIS_TID">0</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_HAS_AXIS_TKEEP</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_HAS_AXIS_TKEEP">0</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_HAS_AXIS_TLAST</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_HAS_AXIS_TLAST">1</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_HAS_AXIS_TREADY</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_HAS_AXIS_TREADY">1</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_HAS_AXIS_TSTRB</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_HAS_AXIS_TSTRB">0</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_HAS_AXIS_TUSER</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_HAS_AXIS_TUSER">1</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_HAS_AXI_ARUSER</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_HAS_AXI_ARUSER">0</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_HAS_AXI_AWUSER</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_HAS_AXI_AWUSER">0</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_HAS_AXI_BUSER</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_HAS_AXI_BUSER">0</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_HAS_AXI_ID</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_HAS_AXI_ID">0</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_HAS_AXI_RD_CHANNEL</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_HAS_AXI_RD_CHANNEL">1</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_HAS_AXI_RUSER</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_HAS_AXI_RUSER">0</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_HAS_AXI_WR_CHANNEL</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_HAS_AXI_WR_CHANNEL">1</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_HAS_AXI_WUSER</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_HAS_AXI_WUSER">0</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_HAS_BACKUP</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_HAS_BACKUP">0</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_HAS_DATA_COUNT</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_HAS_DATA_COUNT">0</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_HAS_DATA_COUNTS_AXIS</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_HAS_DATA_COUNTS_AXIS">0</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_HAS_DATA_COUNTS_RACH</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_HAS_DATA_COUNTS_RACH">0</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_HAS_DATA_COUNTS_RDCH</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_HAS_DATA_COUNTS_RDCH">0</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_HAS_DATA_COUNTS_WACH</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_HAS_DATA_COUNTS_WACH">0</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_HAS_DATA_COUNTS_WDCH</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_HAS_DATA_COUNTS_WDCH">0</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_HAS_DATA_COUNTS_WRCH</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_HAS_DATA_COUNTS_WRCH">0</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_HAS_INT_CLK</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_HAS_INT_CLK">0</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_HAS_MASTER_CE</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_HAS_MASTER_CE">0</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_HAS_MEMINIT_FILE</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_HAS_MEMINIT_FILE">0</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_HAS_OVERFLOW</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_HAS_OVERFLOW">0</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_HAS_PROG_FLAGS_AXIS</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_HAS_PROG_FLAGS_AXIS">0</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_HAS_PROG_FLAGS_RACH</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_HAS_PROG_FLAGS_RACH">0</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_HAS_PROG_FLAGS_RDCH</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_HAS_PROG_FLAGS_RDCH">0</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_HAS_PROG_FLAGS_WACH</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_HAS_PROG_FLAGS_WACH">0</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_HAS_PROG_FLAGS_WDCH</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_HAS_PROG_FLAGS_WDCH">0</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_HAS_PROG_FLAGS_WRCH</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_HAS_PROG_FLAGS_WRCH">0</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_HAS_RD_DATA_COUNT</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_HAS_RD_DATA_COUNT">0</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_HAS_RD_RST</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_HAS_RD_RST">0</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_HAS_RST</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_HAS_RST">1</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_HAS_SLAVE_CE</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_HAS_SLAVE_CE">0</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_HAS_SRST</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_HAS_SRST">0</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_HAS_UNDERFLOW</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_HAS_UNDERFLOW">0</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_HAS_VALID</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_HAS_VALID">0</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_HAS_WR_ACK</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_HAS_WR_ACK">0</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_HAS_WR_DATA_COUNT</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_HAS_WR_DATA_COUNT">0</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_HAS_WR_RST</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_HAS_WR_RST">0</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_IMPLEMENTATION_TYPE</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_IMPLEMENTATION_TYPE">0</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_IMPLEMENTATION_TYPE_AXIS</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_IMPLEMENTATION_TYPE_AXIS">12</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_IMPLEMENTATION_TYPE_RACH</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_IMPLEMENTATION_TYPE_RACH">12</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_IMPLEMENTATION_TYPE_RDCH</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_IMPLEMENTATION_TYPE_RDCH">11</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_IMPLEMENTATION_TYPE_WACH</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_IMPLEMENTATION_TYPE_WACH">12</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_IMPLEMENTATION_TYPE_WDCH</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_IMPLEMENTATION_TYPE_WDCH">11</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_IMPLEMENTATION_TYPE_WRCH</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_IMPLEMENTATION_TYPE_WRCH">12</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_INIT_WR_PNTR_VAL</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_INIT_WR_PNTR_VAL">0</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_INTERFACE_TYPE</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_INTERFACE_TYPE">1</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_MEMORY_TYPE</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_MEMORY_TYPE">1</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_MIF_FILE_NAME</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_MIF_FILE_NAME">BlankString</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_MSGON_VAL</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_MSGON_VAL">1</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_OPTIMIZATION_MODE</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_OPTIMIZATION_MODE">0</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_OVERFLOW_LOW</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_OVERFLOW_LOW">0</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_POWER_SAVING_MODE</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_POWER_SAVING_MODE">0</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_PRELOAD_LATENCY</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_PRELOAD_LATENCY">1</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_PRELOAD_REGS</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_PRELOAD_REGS">0</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_PRIM_FIFO_TYPE</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_PRIM_FIFO_TYPE">4kx4</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_PRIM_FIFO_TYPE_AXIS</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_PRIM_FIFO_TYPE_AXIS">512x36</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_PRIM_FIFO_TYPE_RACH</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_PRIM_FIFO_TYPE_RACH">512x36</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_PRIM_FIFO_TYPE_RDCH</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_PRIM_FIFO_TYPE_RDCH">1kx36</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_PRIM_FIFO_TYPE_WACH</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_PRIM_FIFO_TYPE_WACH">512x36</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_PRIM_FIFO_TYPE_WDCH</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_PRIM_FIFO_TYPE_WDCH">1kx36</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_PRIM_FIFO_TYPE_WRCH</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_PRIM_FIFO_TYPE_WRCH">512x36</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_PROG_EMPTY_THRESH_ASSERT_VAL</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_PROG_EMPTY_THRESH_ASSERT_VAL">2</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_PROG_EMPTY_THRESH_ASSERT_VAL_AXIS</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_PROG_EMPTY_THRESH_ASSERT_VAL_AXIS">13</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_PROG_EMPTY_THRESH_ASSERT_VAL_RACH</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_PROG_EMPTY_THRESH_ASSERT_VAL_RACH">13</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_PROG_EMPTY_THRESH_ASSERT_VAL_RDCH</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_PROG_EMPTY_THRESH_ASSERT_VAL_RDCH">1021</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_PROG_EMPTY_THRESH_ASSERT_VAL_WACH</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_PROG_EMPTY_THRESH_ASSERT_VAL_WACH">13</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_PROG_EMPTY_THRESH_ASSERT_VAL_WDCH</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_PROG_EMPTY_THRESH_ASSERT_VAL_WDCH">1021</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_PROG_EMPTY_THRESH_ASSERT_VAL_WRCH</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_PROG_EMPTY_THRESH_ASSERT_VAL_WRCH">13</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_PROG_EMPTY_THRESH_NEGATE_VAL</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_PROG_EMPTY_THRESH_NEGATE_VAL">3</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_PROG_EMPTY_TYPE</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_PROG_EMPTY_TYPE">0</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_PROG_EMPTY_TYPE_AXIS</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_PROG_EMPTY_TYPE_AXIS">0</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_PROG_EMPTY_TYPE_RACH</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_PROG_EMPTY_TYPE_RACH">0</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_PROG_EMPTY_TYPE_RDCH</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_PROG_EMPTY_TYPE_RDCH">0</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_PROG_EMPTY_TYPE_WACH</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_PROG_EMPTY_TYPE_WACH">0</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_PROG_EMPTY_TYPE_WDCH</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_PROG_EMPTY_TYPE_WDCH">0</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_PROG_EMPTY_TYPE_WRCH</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_PROG_EMPTY_TYPE_WRCH">0</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_PROG_FULL_THRESH_ASSERT_VAL</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_PROG_FULL_THRESH_ASSERT_VAL">1022</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_PROG_FULL_THRESH_ASSERT_VAL_AXIS</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_PROG_FULL_THRESH_ASSERT_VAL_AXIS">15</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_PROG_FULL_THRESH_ASSERT_VAL_RACH</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_PROG_FULL_THRESH_ASSERT_VAL_RACH">15</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_PROG_FULL_THRESH_ASSERT_VAL_RDCH</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_PROG_FULL_THRESH_ASSERT_VAL_RDCH">1023</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_PROG_FULL_THRESH_ASSERT_VAL_WACH</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_PROG_FULL_THRESH_ASSERT_VAL_WACH">15</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_PROG_FULL_THRESH_ASSERT_VAL_WDCH</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_PROG_FULL_THRESH_ASSERT_VAL_WDCH">1023</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_PROG_FULL_THRESH_ASSERT_VAL_WRCH</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_PROG_FULL_THRESH_ASSERT_VAL_WRCH">15</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_PROG_FULL_THRESH_NEGATE_VAL</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_PROG_FULL_THRESH_NEGATE_VAL">1021</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_PROG_FULL_TYPE</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_PROG_FULL_TYPE">0</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_PROG_FULL_TYPE_AXIS</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_PROG_FULL_TYPE_AXIS">0</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_PROG_FULL_TYPE_RACH</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_PROG_FULL_TYPE_RACH">0</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_PROG_FULL_TYPE_RDCH</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_PROG_FULL_TYPE_RDCH">0</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_PROG_FULL_TYPE_WACH</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_PROG_FULL_TYPE_WACH">0</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_PROG_FULL_TYPE_WDCH</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_PROG_FULL_TYPE_WDCH">0</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_PROG_FULL_TYPE_WRCH</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_PROG_FULL_TYPE_WRCH">0</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_RACH_TYPE</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_RACH_TYPE">0</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_RDCH_TYPE</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_RDCH_TYPE">0</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_RD_DATA_COUNT_WIDTH</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_RD_DATA_COUNT_WIDTH">10</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_RD_DEPTH</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_RD_DEPTH">1024</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_RD_FREQ</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_RD_FREQ">1</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_RD_PNTR_WIDTH</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_RD_PNTR_WIDTH">10</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_REG_SLICE_MODE_AXIS</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_REG_SLICE_MODE_AXIS">0</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_REG_SLICE_MODE_RACH</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_REG_SLICE_MODE_RACH">0</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_REG_SLICE_MODE_RDCH</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_REG_SLICE_MODE_RDCH">0</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_REG_SLICE_MODE_WACH</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_REG_SLICE_MODE_WACH">0</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_REG_SLICE_MODE_WDCH</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_REG_SLICE_MODE_WDCH">0</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_REG_SLICE_MODE_WRCH</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_REG_SLICE_MODE_WRCH">0</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_SYNCHRONIZER_STAGE</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_SYNCHRONIZER_STAGE">2</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_UNDERFLOW_LOW</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_UNDERFLOW_LOW">0</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_USE_COMMON_OVERFLOW</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_USE_COMMON_OVERFLOW">0</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_USE_COMMON_UNDERFLOW</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_USE_COMMON_UNDERFLOW">0</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_USE_DEFAULT_SETTINGS</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_USE_DEFAULT_SETTINGS">0</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_USE_DOUT_RST</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_USE_DOUT_RST">1</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_USE_ECC</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_USE_ECC">0</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_USE_ECC_AXIS</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_USE_ECC_AXIS">0</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_USE_ECC_RACH</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_USE_ECC_RACH">0</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_USE_ECC_RDCH</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_USE_ECC_RDCH">0</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_USE_ECC_WACH</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_USE_ECC_WACH">0</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_USE_ECC_WDCH</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_USE_ECC_WDCH">0</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_USE_ECC_WRCH</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_USE_ECC_WRCH">0</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_USE_EMBEDDED_REG</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_USE_EMBEDDED_REG">0</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_USE_FIFO16_FLAGS</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_USE_FIFO16_FLAGS">0</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_USE_FWFT_DATA_COUNT</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_USE_FWFT_DATA_COUNT">0</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_USE_PIPELINE_REG</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_USE_PIPELINE_REG">0</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_VALID_LOW</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_VALID_LOW">0</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_WACH_TYPE</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_WACH_TYPE">0</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_WDCH_TYPE</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_WDCH_TYPE">0</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_WRCH_TYPE</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_WRCH_TYPE">0</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_WR_ACK_LOW</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_WR_ACK_LOW">0</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_WR_DATA_COUNT_WIDTH</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_WR_DATA_COUNT_WIDTH">10</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_WR_DEPTH</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_WR_DEPTH">1024</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_WR_DEPTH_AXIS</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_WR_DEPTH_AXIS">16</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_WR_DEPTH_RACH</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_WR_DEPTH_RACH">16</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_WR_DEPTH_RDCH</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_WR_DEPTH_RDCH">1024</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_WR_DEPTH_WACH</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_WR_DEPTH_WACH">16</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_WR_DEPTH_WDCH</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_WR_DEPTH_WDCH">1024</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_WR_DEPTH_WRCH</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_WR_DEPTH_WRCH">16</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_WR_FREQ</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_WR_FREQ">1</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_WR_PNTR_WIDTH</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_WR_PNTR_WIDTH">10</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_WR_PNTR_WIDTH_AXIS</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_WR_PNTR_WIDTH_AXIS">4</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_WR_PNTR_WIDTH_RACH</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_WR_PNTR_WIDTH_RACH">4</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_WR_PNTR_WIDTH_RDCH</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_WR_PNTR_WIDTH_RDCH">10</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_WR_PNTR_WIDTH_WACH</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_WR_PNTR_WIDTH_WACH">4</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_WR_PNTR_WIDTH_WDCH</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_WR_PNTR_WIDTH_WDCH">10</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_WR_PNTR_WIDTH_WRCH</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_WR_PNTR_WIDTH_WRCH">4</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter>
+        <spirit:name>C_WR_RESPONSE_LATENCY</spirit:name>
+        <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_WR_RESPONSE_LATENCY">1</spirit:value>
+      </spirit:modelParameter>
+    </spirit:modelParameters>
+  </spirit:model>
+  <spirit:fileSets>
+    <spirit:fileSet>
+      <spirit:name>xilinx_externalfiles_view_fileset</spirit:name>
+      <spirit:file>
+        <spirit:name>mac_fifo_axi4.dcp</spirit:name>
+        <spirit:userFileType>dcp</spirit:userFileType>
+        <spirit:userFileType>USED_IN_implementation</spirit:userFileType>
+        <spirit:userFileType>USED_IN_synthesis</spirit:userFileType>
+        <spirit:logicalName>xil_defaultlib</spirit:logicalName>
+      </spirit:file>
+      <spirit:file>
+        <spirit:name>mac_fifo_axi4_stub.v</spirit:name>
+        <spirit:fileType>verilogSource</spirit:fileType>
+        <spirit:userFileType>USED_IN_synth_blackbox_stub</spirit:userFileType>
+        <spirit:logicalName>xil_defaultlib</spirit:logicalName>
+      </spirit:file>
+      <spirit:file>
+        <spirit:name>mac_fifo_axi4_stub.vhdl</spirit:name>
+        <spirit:fileType>vhdlSource</spirit:fileType>
+        <spirit:userFileType>USED_IN_synth_blackbox_stub</spirit:userFileType>
+        <spirit:logicalName>xil_defaultlib</spirit:logicalName>
+      </spirit:file>
+      <spirit:file>
+        <spirit:name>mac_fifo_axi4_sim_netlist.v</spirit:name>
+        <spirit:fileType>verilogSource</spirit:fileType>
+        <spirit:userFileType>USED_IN_simulation</spirit:userFileType>
+        <spirit:userFileType>USED_IN_single_language</spirit:userFileType>
+        <spirit:logicalName>xil_defaultlib</spirit:logicalName>
+      </spirit:file>
+      <spirit:file>
+        <spirit:name>mac_fifo_axi4_sim_netlist.vhdl</spirit:name>
+        <spirit:fileType>vhdlSource</spirit:fileType>
+        <spirit:userFileType>USED_IN_simulation</spirit:userFileType>
+        <spirit:userFileType>USED_IN_single_language</spirit:userFileType>
+        <spirit:logicalName>xil_defaultlib</spirit:logicalName>
+      </spirit:file>
+    </spirit:fileSet>
+  </spirit:fileSets>
+  <spirit:parameters>
+    <spirit:parameter>
+      <spirit:name>ADDRESS_WIDTH</spirit:name>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.ADDRESS_WIDTH">32</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>ARUSER_Width</spirit:name>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.ARUSER_Width">0</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>AWUSER_Width</spirit:name>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.AWUSER_Width">0</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>Add_NGC_Constraint_AXI</spirit:name>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.Add_NGC_Constraint_AXI">false</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>Almost_Empty_Flag</spirit:name>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.Almost_Empty_Flag">false</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>Almost_Full_Flag</spirit:name>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.Almost_Full_Flag">false</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>BUSER_Width</spirit:name>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.BUSER_Width">0</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>Clock_Enable_Type</spirit:name>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.Clock_Enable_Type">Slave_Interface_Clock_Enable</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>Clock_Type_AXI</spirit:name>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.Clock_Type_AXI">Independent_Clock</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>Component_Name</spirit:name>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.Component_Name">mac_fifo_axi4</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>DATA_WIDTH</spirit:name>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.DATA_WIDTH">64</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>Data_Count</spirit:name>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.Data_Count">false</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>Data_Count_Width</spirit:name>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.Data_Count_Width">10</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>Disable_Timing_Violations</spirit:name>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.Disable_Timing_Violations">false</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>Disable_Timing_Violations_AXI</spirit:name>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.Disable_Timing_Violations_AXI">false</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>Dout_Reset_Value</spirit:name>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.Dout_Reset_Value">0</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>Empty_Threshold_Assert_Value</spirit:name>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.Empty_Threshold_Assert_Value">2</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>Empty_Threshold_Assert_Value_axis</spirit:name>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.Empty_Threshold_Assert_Value_axis">13</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>Empty_Threshold_Assert_Value_rach</spirit:name>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.Empty_Threshold_Assert_Value_rach">13</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>Empty_Threshold_Assert_Value_rdch</spirit:name>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.Empty_Threshold_Assert_Value_rdch">1021</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>Empty_Threshold_Assert_Value_wach</spirit:name>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.Empty_Threshold_Assert_Value_wach">13</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>Empty_Threshold_Assert_Value_wdch</spirit:name>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.Empty_Threshold_Assert_Value_wdch">1021</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>Empty_Threshold_Assert_Value_wrch</spirit:name>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.Empty_Threshold_Assert_Value_wrch">13</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>Empty_Threshold_Negate_Value</spirit:name>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.Empty_Threshold_Negate_Value">3</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>Enable_Common_Overflow</spirit:name>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.Enable_Common_Overflow">false</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>Enable_Common_Underflow</spirit:name>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.Enable_Common_Underflow">false</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>Enable_Data_Counts_axis</spirit:name>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.Enable_Data_Counts_axis">false</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>Enable_Data_Counts_rach</spirit:name>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.Enable_Data_Counts_rach">false</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>Enable_Data_Counts_rdch</spirit:name>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.Enable_Data_Counts_rdch">false</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>Enable_Data_Counts_wach</spirit:name>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.Enable_Data_Counts_wach">false</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>Enable_Data_Counts_wdch</spirit:name>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.Enable_Data_Counts_wdch">false</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>Enable_Data_Counts_wrch</spirit:name>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.Enable_Data_Counts_wrch">false</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>Enable_ECC</spirit:name>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.Enable_ECC">false</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>Enable_ECC_axis</spirit:name>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.Enable_ECC_axis">false</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>Enable_ECC_rach</spirit:name>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.Enable_ECC_rach">false</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>Enable_ECC_rdch</spirit:name>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.Enable_ECC_rdch">false</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>Enable_ECC_wach</spirit:name>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.Enable_ECC_wach">false</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>Enable_ECC_wdch</spirit:name>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.Enable_ECC_wdch">false</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>Enable_ECC_wrch</spirit:name>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.Enable_ECC_wrch">false</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>Enable_Reset_Synchronization</spirit:name>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.Enable_Reset_Synchronization">true</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>Enable_TLAST</spirit:name>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.Enable_TLAST">true</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>Enable_TREADY</spirit:name>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.Enable_TREADY">true</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>FIFO_Application_Type_axis</spirit:name>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.FIFO_Application_Type_axis">Data_FIFO</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>FIFO_Application_Type_rach</spirit:name>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.FIFO_Application_Type_rach">Data_FIFO</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>FIFO_Application_Type_rdch</spirit:name>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.FIFO_Application_Type_rdch">Data_FIFO</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>FIFO_Application_Type_wach</spirit:name>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.FIFO_Application_Type_wach">Data_FIFO</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>FIFO_Application_Type_wdch</spirit:name>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.FIFO_Application_Type_wdch">Data_FIFO</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>FIFO_Application_Type_wrch</spirit:name>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.FIFO_Application_Type_wrch">Data_FIFO</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>FIFO_Implementation_axis</spirit:name>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.FIFO_Implementation_axis">Independent_Clocks_Distributed_RAM</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>FIFO_Implementation_rach</spirit:name>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.FIFO_Implementation_rach">Independent_Clocks_Distributed_RAM</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>FIFO_Implementation_rdch</spirit:name>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.FIFO_Implementation_rdch">Independent_Clocks_Block_RAM</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>FIFO_Implementation_wach</spirit:name>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.FIFO_Implementation_wach">Independent_Clocks_Distributed_RAM</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>FIFO_Implementation_wdch</spirit:name>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.FIFO_Implementation_wdch">Independent_Clocks_Block_RAM</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>FIFO_Implementation_wrch</spirit:name>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.FIFO_Implementation_wrch">Independent_Clocks_Distributed_RAM</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>Fifo_Implementation</spirit:name>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.Fifo_Implementation">Common_Clock_Block_RAM</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>Full_Flags_Reset_Value</spirit:name>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.Full_Flags_Reset_Value">1</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>Full_Threshold_Assert_Value</spirit:name>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.Full_Threshold_Assert_Value">1022</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>Full_Threshold_Assert_Value_axis</spirit:name>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.Full_Threshold_Assert_Value_axis">15</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>Full_Threshold_Assert_Value_rach</spirit:name>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.Full_Threshold_Assert_Value_rach">15</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>Full_Threshold_Assert_Value_rdch</spirit:name>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.Full_Threshold_Assert_Value_rdch">1023</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>Full_Threshold_Assert_Value_wach</spirit:name>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.Full_Threshold_Assert_Value_wach">15</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>Full_Threshold_Assert_Value_wdch</spirit:name>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.Full_Threshold_Assert_Value_wdch">1023</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>Full_Threshold_Assert_Value_wrch</spirit:name>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.Full_Threshold_Assert_Value_wrch">15</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>Full_Threshold_Negate_Value</spirit:name>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.Full_Threshold_Negate_Value">1021</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>HAS_ACLKEN</spirit:name>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.HAS_ACLKEN">false</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>HAS_TKEEP</spirit:name>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.HAS_TKEEP">false</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>HAS_TSTRB</spirit:name>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.HAS_TSTRB">false</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>ID_WIDTH</spirit:name>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.ID_WIDTH">0</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>INTERFACE_TYPE</spirit:name>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.INTERFACE_TYPE">AXI_STREAM</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>Inject_Dbit_Error</spirit:name>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.Inject_Dbit_Error">false</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>Inject_Dbit_Error_axis</spirit:name>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.Inject_Dbit_Error_axis">false</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>Inject_Dbit_Error_rach</spirit:name>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.Inject_Dbit_Error_rach">false</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>Inject_Dbit_Error_rdch</spirit:name>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.Inject_Dbit_Error_rdch">false</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>Inject_Dbit_Error_wach</spirit:name>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.Inject_Dbit_Error_wach">false</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>Inject_Dbit_Error_wdch</spirit:name>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.Inject_Dbit_Error_wdch">false</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>Inject_Dbit_Error_wrch</spirit:name>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.Inject_Dbit_Error_wrch">false</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>Inject_Sbit_Error</spirit:name>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.Inject_Sbit_Error">false</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>Inject_Sbit_Error_axis</spirit:name>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.Inject_Sbit_Error_axis">false</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>Inject_Sbit_Error_rach</spirit:name>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.Inject_Sbit_Error_rach">false</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>Inject_Sbit_Error_rdch</spirit:name>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.Inject_Sbit_Error_rdch">false</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>Inject_Sbit_Error_wach</spirit:name>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.Inject_Sbit_Error_wach">false</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>Inject_Sbit_Error_wdch</spirit:name>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.Inject_Sbit_Error_wdch">false</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>Inject_Sbit_Error_wrch</spirit:name>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.Inject_Sbit_Error_wrch">false</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>Input_Data_Width</spirit:name>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.Input_Data_Width">18</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>Input_Depth</spirit:name>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.Input_Depth">1024</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>Input_Depth_axis</spirit:name>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.Input_Depth_axis">16</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>Input_Depth_rach</spirit:name>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.Input_Depth_rach">16</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>Input_Depth_rdch</spirit:name>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.Input_Depth_rdch">1024</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>Input_Depth_wach</spirit:name>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.Input_Depth_wach">16</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>Input_Depth_wdch</spirit:name>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.Input_Depth_wdch">1024</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>Input_Depth_wrch</spirit:name>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.Input_Depth_wrch">16</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>Master_interface_Clock_enable_memory_mapped</spirit:name>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.Master_interface_Clock_enable_memory_mapped">false</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>Output_Data_Width</spirit:name>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.Output_Data_Width">18</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>Output_Depth</spirit:name>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.Output_Depth">1024</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>Overflow_Flag</spirit:name>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.Overflow_Flag">false</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>Overflow_Flag_AXI</spirit:name>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.Overflow_Flag_AXI">false</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>Overflow_Sense</spirit:name>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.Overflow_Sense">Active_High</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>Overflow_Sense_AXI</spirit:name>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.Overflow_Sense_AXI">Active_High</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>PROTOCOL</spirit:name>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.PROTOCOL">AXI4</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>Performance_Options</spirit:name>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.Performance_Options">Standard_FIFO</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>Programmable_Empty_Type</spirit:name>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.Programmable_Empty_Type">No_Programmable_Empty_Threshold</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>Programmable_Empty_Type_axis</spirit:name>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.Programmable_Empty_Type_axis">No_Programmable_Empty_Threshold</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>Programmable_Empty_Type_rach</spirit:name>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.Programmable_Empty_Type_rach">No_Programmable_Empty_Threshold</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>Programmable_Empty_Type_rdch</spirit:name>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.Programmable_Empty_Type_rdch">No_Programmable_Empty_Threshold</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>Programmable_Empty_Type_wach</spirit:name>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.Programmable_Empty_Type_wach">No_Programmable_Empty_Threshold</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>Programmable_Empty_Type_wdch</spirit:name>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.Programmable_Empty_Type_wdch">No_Programmable_Empty_Threshold</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>Programmable_Empty_Type_wrch</spirit:name>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.Programmable_Empty_Type_wrch">No_Programmable_Empty_Threshold</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>Programmable_Full_Type</spirit:name>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.Programmable_Full_Type">No_Programmable_Full_Threshold</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>Programmable_Full_Type_axis</spirit:name>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.Programmable_Full_Type_axis">No_Programmable_Full_Threshold</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>Programmable_Full_Type_rach</spirit:name>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.Programmable_Full_Type_rach">No_Programmable_Full_Threshold</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>Programmable_Full_Type_rdch</spirit:name>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.Programmable_Full_Type_rdch">No_Programmable_Full_Threshold</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>Programmable_Full_Type_wach</spirit:name>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.Programmable_Full_Type_wach">No_Programmable_Full_Threshold</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>Programmable_Full_Type_wdch</spirit:name>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.Programmable_Full_Type_wdch">No_Programmable_Full_Threshold</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>Programmable_Full_Type_wrch</spirit:name>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.Programmable_Full_Type_wrch">No_Programmable_Full_Threshold</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>READ_WRITE_MODE</spirit:name>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.READ_WRITE_MODE">READ_WRITE</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>RUSER_Width</spirit:name>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.RUSER_Width">0</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>Read_Clock_Frequency</spirit:name>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.Read_Clock_Frequency">1</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>Read_Data_Count</spirit:name>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.Read_Data_Count">false</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>Read_Data_Count_Width</spirit:name>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.Read_Data_Count_Width">10</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>Register_Slice_Mode_axis</spirit:name>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.Register_Slice_Mode_axis">Fully_Registered</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>Register_Slice_Mode_rach</spirit:name>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.Register_Slice_Mode_rach">Fully_Registered</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>Register_Slice_Mode_rdch</spirit:name>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.Register_Slice_Mode_rdch">Fully_Registered</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>Register_Slice_Mode_wach</spirit:name>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.Register_Slice_Mode_wach">Fully_Registered</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>Register_Slice_Mode_wdch</spirit:name>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.Register_Slice_Mode_wdch">Fully_Registered</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>Register_Slice_Mode_wrch</spirit:name>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.Register_Slice_Mode_wrch">Fully_Registered</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>Reset_Pin</spirit:name>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.Reset_Pin">true</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>Reset_Type</spirit:name>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.Reset_Type">Asynchronous_Reset</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>Slave_interface_Clock_enable_memory_mapped</spirit:name>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.Slave_interface_Clock_enable_memory_mapped">true</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>TDATA_NUM_BYTES</spirit:name>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.TDATA_NUM_BYTES">1</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>TDEST_WIDTH</spirit:name>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.TDEST_WIDTH">0</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>TID_WIDTH</spirit:name>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.TID_WIDTH">0</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>TKEEP_WIDTH</spirit:name>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.TKEEP_WIDTH">1</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>TSTRB_WIDTH</spirit:name>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.TSTRB_WIDTH">1</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>TUSER_WIDTH</spirit:name>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.TUSER_WIDTH">1</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>Underflow_Flag</spirit:name>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.Underflow_Flag">false</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>Underflow_Flag_AXI</spirit:name>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.Underflow_Flag_AXI">false</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>Underflow_Sense</spirit:name>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.Underflow_Sense">Active_High</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>Underflow_Sense_AXI</spirit:name>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.Underflow_Sense_AXI">Active_High</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>Use_Dout_Reset</spirit:name>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.Use_Dout_Reset">true</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>Use_Embedded_Registers</spirit:name>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.Use_Embedded_Registers">false</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>Use_Embedded_Registers_axis</spirit:name>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.Use_Embedded_Registers_axis">false</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>Use_Extra_Logic</spirit:name>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.Use_Extra_Logic">false</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>Valid_Flag</spirit:name>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.Valid_Flag">false</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>Valid_Sense</spirit:name>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.Valid_Sense">Active_High</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>WUSER_Width</spirit:name>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.WUSER_Width">0</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>Write_Acknowledge_Flag</spirit:name>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.Write_Acknowledge_Flag">false</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>Write_Acknowledge_Sense</spirit:name>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.Write_Acknowledge_Sense">Active_High</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>Write_Clock_Frequency</spirit:name>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.Write_Clock_Frequency">1</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>Write_Data_Count</spirit:name>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.Write_Data_Count">false</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>Write_Data_Count_Width</spirit:name>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.Write_Data_Count_Width">10</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>asymmetric_port_width</spirit:name>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.asymmetric_port_width">false</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>axis_type</spirit:name>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.axis_type">FIFO</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>dynamic_power_saving</spirit:name>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.dynamic_power_saving">false</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>ecc_pipeline_reg</spirit:name>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.ecc_pipeline_reg">false</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>enable_low_latency</spirit:name>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.enable_low_latency">false</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>enable_read_pointer_increment_by2</spirit:name>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.enable_read_pointer_increment_by2">false</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>rach_type</spirit:name>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.rach_type">FIFO</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>rdch_type</spirit:name>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.rdch_type">FIFO</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>synchronization_stages</spirit:name>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.synchronization_stages">2</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>synchronization_stages_axi</spirit:name>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.synchronization_stages_axi">2</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>use_dout_register</spirit:name>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.use_dout_register">false</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>wach_type</spirit:name>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.wach_type">FIFO</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>wdch_type</spirit:name>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.wdch_type">FIFO</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>wrch_type</spirit:name>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.wrch_type">FIFO</spirit:value>
+    </spirit:parameter>
+  </spirit:parameters>
+  <spirit:vendorExtensions>
+    <xilinx:coreExtensions>
+      <xilinx:configElementInfos>
+        <xilinx:configElementInfo xilinx:referenceId="PARAM_VALUE.Clock_Type_AXI" xilinx:valueSource="user"/>
+        <xilinx:configElementInfo xilinx:referenceId="PARAM_VALUE.Empty_Threshold_Assert_Value_axis" xilinx:valueSource="user"/>
+        <xilinx:configElementInfo xilinx:referenceId="PARAM_VALUE.Empty_Threshold_Assert_Value_rach" xilinx:valueSource="user"/>
+        <xilinx:configElementInfo xilinx:referenceId="PARAM_VALUE.Empty_Threshold_Assert_Value_rdch" xilinx:valueSource="user"/>
+        <xilinx:configElementInfo xilinx:referenceId="PARAM_VALUE.Empty_Threshold_Assert_Value_wach" xilinx:valueSource="user"/>
+        <xilinx:configElementInfo xilinx:referenceId="PARAM_VALUE.Empty_Threshold_Assert_Value_wdch" xilinx:valueSource="user"/>
+        <xilinx:configElementInfo xilinx:referenceId="PARAM_VALUE.Empty_Threshold_Assert_Value_wrch" xilinx:valueSource="user"/>
+        <xilinx:configElementInfo xilinx:referenceId="PARAM_VALUE.Enable_TLAST" xilinx:valueSource="user"/>
+        <xilinx:configElementInfo xilinx:referenceId="PARAM_VALUE.FIFO_Implementation_axis" xilinx:valueSource="user"/>
+        <xilinx:configElementInfo xilinx:referenceId="PARAM_VALUE.FIFO_Implementation_rach" xilinx:valueSource="user"/>
+        <xilinx:configElementInfo xilinx:referenceId="PARAM_VALUE.FIFO_Implementation_rdch" xilinx:valueSource="user"/>
+        <xilinx:configElementInfo xilinx:referenceId="PARAM_VALUE.FIFO_Implementation_wach" xilinx:valueSource="user"/>
+        <xilinx:configElementInfo xilinx:referenceId="PARAM_VALUE.FIFO_Implementation_wdch" xilinx:valueSource="user"/>
+        <xilinx:configElementInfo xilinx:referenceId="PARAM_VALUE.FIFO_Implementation_wrch" xilinx:valueSource="user"/>
+        <xilinx:configElementInfo xilinx:referenceId="PARAM_VALUE.Full_Threshold_Assert_Value_axis" xilinx:valueSource="user"/>
+        <xilinx:configElementInfo xilinx:referenceId="PARAM_VALUE.Full_Threshold_Assert_Value_rach" xilinx:valueSource="user"/>
+        <xilinx:configElementInfo xilinx:referenceId="PARAM_VALUE.Full_Threshold_Assert_Value_wach" xilinx:valueSource="user"/>
+        <xilinx:configElementInfo xilinx:referenceId="PARAM_VALUE.Full_Threshold_Assert_Value_wrch" xilinx:valueSource="user"/>
+        <xilinx:configElementInfo xilinx:referenceId="PARAM_VALUE.INTERFACE_TYPE" xilinx:valueSource="user"/>
+        <xilinx:configElementInfo xilinx:referenceId="PARAM_VALUE.Input_Depth_axis" xilinx:valueSource="user"/>
+        <xilinx:configElementInfo xilinx:referenceId="PARAM_VALUE.TUSER_WIDTH" xilinx:valueSource="user"/>
+      </xilinx:configElementInfos>
+    </xilinx:coreExtensions>
+  </spirit:vendorExtensions>
+</spirit:component>
