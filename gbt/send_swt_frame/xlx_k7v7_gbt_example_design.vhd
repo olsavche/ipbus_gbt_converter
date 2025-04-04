@@ -63,10 +63,10 @@ use work.gbt_bank_package.all;
 use work.vendor_specific_gbt_bank_package.all;
 use work.gbt_exampledesign_package.all;
 
+
 --=================================================================================================--
 --#######################################   Entity   ##############################################--
 --=================================================================================================--
-
 
 entity xlx_k7v7_gbt_example_design is
 	generic (
@@ -227,7 +227,22 @@ architecture structural of xlx_k7v7_gbt_example_design is
    signal txData_from_gbtBank_pattGen      : gbt_reg84_A(1 to NUM_LINKS);
    signal txwBData_from_gbtBank_pattGen    : gbt_reg32_A(1 to NUM_LINKS);
 	
-   --=====================================================================================--      
+    signal m_bus : my_bus;
+    signal my_txData_from_gbtBank_pattGen : std_logic_vector(83 downto 0);
+
+    COMPONENT vio_0
+        PORT (
+        clk : IN STD_LOGIC;
+        probe_in0 : IN STD_LOGIC_VECTOR(0 DOWNTO 0);
+        probe_out0 : OUT STD_LOGIC_VECTOR(0 DOWNTO 0);
+        probe_out1 : OUT STD_LOGIC_VECTOR(0 DOWNTO 0);
+        probe_out2 : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
+        probe_out3 : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
+        probe_out4 : OUT STD_LOGIC_VECTOR(3 DOWNTO 0)
+        );
+        END COMPONENT;
+   --=====================================================================================--  
+
 
 --=================================================================================================--
 begin                 --========####   Architecture Body   ####========-- 
@@ -313,7 +328,33 @@ begin                 --========####   Architecture Body   ####========--
            
            GBTBANK_GBTTX_READY_O(i)   <= not(gbt_txreset_s(i));
      end generate;
-               
+
+   --========================--
+   -- VIO --
+   --========================--
+    vio_swt_frane_control_inst : entity work.vio_swt_frane_control
+        port map (
+        i_clk => FRAMECLK_40MHZ,
+        i_reset => gbt_txreset_s(1),
+        i_sel => m_bus.i_sel, --vio
+        i_send_button => m_bus.i_send_button, --vio
+        i_data => m_bus.i_data, --vio
+        i_adress => m_bus.i_adress, --vio
+        i_tran_type => m_bus.i_tran_type, --vio
+        o_swt_frame => m_bus.o_swt_frame, 
+        o_sel => m_bus.o_sel 
+        );
+    
+    your_instance_name : vio_0
+        PORT MAP (
+        clk => FRAMECLK_40MHZ,
+        probe_in0 => open,
+        probe_out0 => m_bus.i_sel,
+        probe_out1 => m_bus.i_send_button,
+        probe_out2 => m_bus.i_data,
+        probe_out3 => m_bus.i_adress,
+        probe_out4 => m_bus.i_tran_type);
+
    --========================--
    -- Data pattern generator --
    --========================--
@@ -348,15 +389,17 @@ begin                 --========####   Architecture Body   ####========--
                TX_EXTRA_DATA_WIDEBUS_O                        => txwBData_from_gbtBank_pattGen(i)
            );
                        
+           my_txData_from_gbtBank_pattGen      <= txData_from_gbtBank_pattGen(i)  when m_bus.o_sel = "0" else ( x"0" & m_bus.o_swt_frame ); 
+
            gbt_txdata_s(i)                     <=  GBTBANK_WB_DATA_I(i)(115 downto 32) when GBTBANK_TEST_PATTERN_SEL_I = "11" and (TX_ENCODING = WIDE_BUS or (TX_ENCODING = GBT_DYNAMIC and TX_ENCODING_SEL_i(i) = '0')) else
                                                    GBTBANK_GBT_DATA_I(i) when    GBTBANK_TEST_PATTERN_SEL_I = "11" and (TX_ENCODING = GBT_FRAME or (TX_ENCODING = GBT_DYNAMIC and TX_ENCODING_SEL_i(i) = '1')) else
-                                                   txData_from_gbtBank_pattGen(i);
+                                                    my_txData_from_gbtBank_pattGen;
                                                            
            wb_txdata_s(i)                      <=  GBTBANK_WB_DATA_I(i)(31 downto 0) when GBTBANK_TEST_PATTERN_SEL_I = "11" else
                                                    txwBData_from_gbtBank_pattGen(i);
                                                    
-           TX_DATA_O(i)                        <= gbt_txdata_s(i);
-           WB_DATA_O(i)                        <= gbt_txdata_s(i) & wb_txdata_s(i);
+           --TX_DATA_O(i)                        <= gbt_txdata_s(i);
+           --WB_DATA_O(i)                        <= gbt_txdata_s(i) & wb_txdata_s(i);
            
        end generate;        
    end generate;

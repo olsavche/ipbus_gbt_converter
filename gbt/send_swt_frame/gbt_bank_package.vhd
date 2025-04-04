@@ -84,6 +84,17 @@ package gbt_bank_package is
                       signal   shift            : in std_logic_vector( 3 downto 0)) return std_logic_vector;
    
    --=====================================================================================--   
+
+   type my_bus is record
+      i_sel : std_logic_vector(0 downto 0);
+      i_send_button : std_logic_vector(0 downto 0);
+      i_data : std_logic_vector(31 downto 0); 
+      i_adress : std_logic_vector(31 downto 0);  
+      i_tran_type : std_logic_vector(3 downto 0);
+      o_swt_frame : std_logic_vector(79 downto 0); 
+      o_sel : std_logic_vector(0 downto 0);
+   end record;
+
 end gbt_bank_package;
 
 --=================================================================================================--
