@@ -60,8 +60,8 @@ begin
     -- 
     ipb_addr   <= addr_reg when active = '1' else (others => '0');
     ipb_wdata  <=  (others => '0');
-    --ipb_strobe <= '1' when active = '1' else '0';
-    ipb_strobe <= '1' when (active = '1') and o_done = '1' else '0';
+    ipb_strobe <= '1' when active = '1' else '0';
+    --ipb_strobe <= '1' when (active = '1') and o_done = '1' else '0';
     ipb_write  <= '0';
     -- 
     set_wbus(o_wbus,ipb_addr, ipb_wdata, ipb_strobe, ipb_write);

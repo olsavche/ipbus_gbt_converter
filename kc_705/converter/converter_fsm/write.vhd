@@ -60,9 +60,10 @@ begin
     -- signals
     ipb_addr   <= addr_reg when active = '1' else (others => '0');
     ipb_wdata  <= wdata_reg when active = '1' else (others => '0');
-    --ipb_strobe <= '1' when active = '1' else '0';
-    ipb_strobe <= '1' when (active = '1') and o_done = '1' else '0';
-    ipb_write  <= '1' when (active = '1') and o_done = '1' else '0';
+    ipb_strobe <= '1' when active = '1' else '0';
+    ipb_write <= '1' when active = '1' else '0';
+    --ipb_strobe <= '1' when (active = '1'); -- and o_done = '1' else '0';
+    --ipb_write  <= '1' when (active = '1'); -- and o_done = '1' else '0';
     -- out
     set_wbus(o_wbus,ipb_addr, ipb_wdata, ipb_strobe, ipb_write);
     o_done <= '1' when (active = '1' and counter = "10") else '0'; -- ipb_strobe <= '1' when (active = '1') and o_done = '1' else '0';

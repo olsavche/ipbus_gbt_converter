@@ -88,7 +88,7 @@ begin
             if rising_edge(i_clk) then
                 case state is
                     when t_IDEL =>              o_rd_en <= '0';
-                                                --clk_div2(i_reset,'0',internal_clk,clk_div);
+                                                clk_div2(i_reset,'0',internal_clk,clk_div);
                     when t_SEND_RD_EN =>        o_rd_en <= '1';
                     when t_WAIT =>              o_rd_en <= '0';
                     when t_DATA =>          
@@ -109,7 +109,7 @@ begin
                                                     when others =>                  start  <= (others => '0') ;
                                                 end case;   
                     when t_WAIT_2 =>            start  <= int_to_vector(0,c_N_TYPE);
-                                                --clk_div2(i_reset,'1',internal_clk,clk_div);
+                                                clk_div2(i_reset,'1',internal_clk,clk_div);
                     when others =>              null;
                 end case;
                 
@@ -194,8 +194,8 @@ begin
         s_done <= done(0) or done(1) or done(2) or done(3) or done(4); ----------------------------------!!!!!!!!!!!!!!!!!!!!!!!!!
         o_ack_and <= '0'    when    (gbt_data.transaction_type = c_WRITE or 
                                     wbus_array(4).ipb_write = '1' ) 
-                            else    --(clk_div AND rbus_from_reg_v.ipb_ack); 
-                                    rbus_from_reg_v.ipb_ack; 
+                            else    (clk_div AND rbus_from_reg_v.ipb_ack); 
+                                    --rbus_from_reg_v.ipb_ack; 
                                     --o_ack_and <= clk_div AND rbus_from_reg_v.ipb_ack; 
 
         unpack_rbus(rbus_from_reg_v,rbus_data,rbus_ack,rbus_err);
