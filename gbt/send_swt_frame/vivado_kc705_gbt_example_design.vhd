@@ -401,6 +401,19 @@ architecture structural of kc705_gbt_example_design is
                  probe_out15: OUT STD_LOGIC_VECTOR(0 DOWNTO 0)
             );
           END COMPONENT;
+          
+          component clk_wiz_MY
+                port
+                 (-- Clock in ports
+                  -- Clock out ports
+                  clk_my_n          : out    std_logic;
+                  clk_my_p          : out    std_logic;
+                  clk_in1           : in     std_logic
+                 );
+          end component;
+          
+          
+
       
    --=====================================================================================--  
 --=================================================================================================--
@@ -418,6 +431,16 @@ begin                 --========####   Architecture Body   ####========--
    --===============--
    -- General reset -- 
    --===============--
+
+   your_instance_name : clk_wiz_MY
+           port map ( 
+          -- Clock out ports  
+           clk_my_n => USER_SMA_GPIO_N,
+           clk_my_p => USER_SMA_GPIO_P,
+           -- Clock in ports
+           clk_in1 => sysclk
+     );
+ 
    
    genRst: entity work.xlx_k7v7_reset
       generic map (
@@ -811,11 +834,11 @@ begin                 --========####   Architecture Body   ####========--
                                                               
    --USER_SMA_GPIO_N                                   <= rxMatchFlag_from_gbtExmplDsgn;
                                                            
-   USER_SMA_GPIO_P                                   <= txMatchFlag_from_gbtExmplDsgn when clkMuxSel_from_user = '0' else
-                                                        txWordClk_from_gbtExmplDsgn;
+   --USER_SMA_GPIO_P                                   <= txMatchFlag_from_gbtExmplDsgn when clkMuxSel_from_user = '0' else
+                                                        --txWordClk_from_gbtExmplDsgn;
                                                            
-   USER_SMA_GPIO_N                                   <= rxMatchFlag_from_gbtExmplDsgn when clkMuxSel_from_user = '0' else
-                                                        txFrameClk_from_txPll;
+   --USER_SMA_GPIO_N                                   <= rxMatchFlag_from_gbtExmplDsgn when clkMuxSel_from_user = '0' else
+                                                        --txFrameClk_from_txPll;
        
 
    -- Pattern match flags:
