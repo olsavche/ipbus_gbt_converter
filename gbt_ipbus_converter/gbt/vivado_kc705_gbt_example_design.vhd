@@ -120,10 +120,10 @@ entity kc705_gbt_example_design is
       -- On-board LEDs --      
       --===============--
 
-      GPIO_LED_0_LS                                  : out std_logic;
-      GPIO_LED_1_LS                                  : out std_logic;
-      GPIO_LED_2_LS                                  : out std_logic;
-      GPIO_LED_3_LS                                  : out std_logic;
+--GPIO_LED_0_LS                                  : out std_logic;
+--      GPIO_LED_1_LS                                  : out std_logic;
+--      GPIO_LED_2_LS                                  : out std_logic;
+--      GPIO_LED_3_LS                                  : out std_logic;
       GPIO_LED_4_LS                                  : out std_logic;
       GPIO_LED_5_LS                                  : out std_logic;
       GPIO_LED_6_LS                                  : out std_logic;
@@ -157,9 +157,10 @@ entity kc705_gbt_example_design is
       FMC_HPC_LA03_P                                 : out std_logic; 
       -----------------------------------------------
       FMC_HPC_LA04_P                                 : out std_logic; 
-      FMC_HPC_LA05_P                                 : out std_logic 
+      FMC_HPC_LA05_P                                 : out std_logic;
 
-   );
+      sysclk_out                                     : out std_logic --    sysclk for ipbus 
+      );
 end kc705_gbt_example_design;
 
 --=================================================================================================--
@@ -778,10 +779,10 @@ begin                 --========####   Architecture Body   ####========--
    -- On-board LEDs:                   
    -----------------    
     
-   GPIO_LED_0_LS                                     <= latOptGbtBankTx_from_gbtExmplDsgn and latOptGbtBankRx_from_gbtExmplDsgn;          
-   GPIO_LED_1_LS                                     <= txFrameClkPllLocked_from_gbtExmplDsgn;
-   GPIO_LED_2_LS                                     <= mgtReady_from_gbtExmplDsgn;
-   GPIO_LED_3_LS                                     <= gbtRxReady_from_gbtExmplDsgn;
+   --GPIO_LED_0_LS                                     <= latOptGbtBankTx_from_gbtExmplDsgn and latOptGbtBankRx_from_gbtExmplDsgn;          
+   --GPIO_LED_1_LS                                     <= txFrameClkPllLocked_from_gbtExmplDsgn;
+   --GPIO_LED_2_LS                                     <= mgtReady_from_gbtExmplDsgn;
+   --GPIO_LED_3_LS                                     <= gbtRxReady_from_gbtExmplDsgn;
    GPIO_LED_4_LS                                     <= gbtRxReadyLostFlag_from_gbtExmplDsgn;
    GPIO_LED_5_LS                                     <= rxDataErrorSeen_from_gbtExmplDsgn;
    GPIO_LED_6_LS                                     <= rxExtrDataWidebusErSeen_from_gbtExmplDsgn;
@@ -828,6 +829,9 @@ begin                 --========####   Architecture Body   ####========--
    
    FMC_HPC_LA00_CC_P                                 <= txMatchFlag_from_gbtExmplDsgn;
    FMC_HPC_LA01_CC_P                                 <= rxMatchFlag_from_gbtExmplDsgn;
+   
+   
+   sysclk_out <= sysclk;
    
    --=====================================================================================--   
 end structural;
