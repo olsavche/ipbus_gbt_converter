@@ -48,7 +48,7 @@ entity clocks_7s_extphy is
 		CLK_AUX_FREQ: real := 40.0
 	);
 	port(
-		sysclk_p: in std_logic;
+		--sysclk_p: in std_logic;
 		sysclk_n: in std_logic;
 		clko_125: out std_logic;
 		clko_125_90: out std_logic;
@@ -78,13 +78,13 @@ architecture rtl of clocks_7s_extphy is
 
 begin
 
-	ibufgds0: IBUFGDS port map(
-		i => sysclk_p,
-		ib => sysclk_n,
-		o => sysclk
-	);
+--	ibufgds0: IBUFGDS port map(
+--		i => sysclk_p,
+--		ib => sysclk_n,
+--		o => sysclk
+--	);
 	
-	clko_200 <= sysclk; -- io delay ref clock only, no bufg
+	clko_200 <= sysclk_n; -- io delay ref clock only, no bufg
 
 	bufg125: BUFG port map(
 		i => clk_125_i,
@@ -123,7 +123,7 @@ begin
 			clkout4_divide => integer(CLK_VCO_FREQ / CLK_AUX_FREQ)
 		)
 		port map(
-			clkin1 => sysclk,
+			clkin1 => sysclk_n,
 			clkfbin => clkfb,
 			clkfbout => clkfb,
 			clkout1 => clk_125_i,
@@ -137,14 +137,14 @@ begin
 	
 	clkdiv: entity work.ipbus_clock_div
 		port map(
-			clk => sysclk,
+			clk => sysclk_n,
 			d17 => d17,
 			d28 => onehz
 		);
 	
-	process(sysclk)
+	process(sysclk_n)
 	begin
-		if rising_edge(sysclk) then
+		if rising_edge(sysclk_n) then
 			d17_d <= d17;
 			if d17='1' and d17_d='0' then
 				rst <= nuke_d2 or not dcm_locked;
