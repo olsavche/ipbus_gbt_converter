@@ -72,3 +72,63 @@ create_clock -period 8.333 -name SMA_MGT_REFCLK [get_ports SMA_MGT_REFCLK_P]
 ##===================================================================================================##
 ##===================================================================================================##
 
+
+##===================================================================================================##
+##===================================IPBUS===========================================================##
+##===================================================================================================##
+
+set_property BITSTREAM.GENERAL.COMPRESS TRUE [current_design]
+
+
+set_false_path -through [get_pins infra/clocks/rst_reg/Q]
+set_false_path -through [get_nets infra/clocks/nuke_i]
+
+set_property IOSTANDARD LVCMOS15 [get_ports {leds[*]}]
+set_property SLEW SLOW [get_ports {leds[*]}]
+set_property PACKAGE_PIN AB8 [get_ports {leds[0]}]
+set_property PACKAGE_PIN AA8 [get_ports {leds[1]}]
+set_property PACKAGE_PIN AC9 [get_ports {leds[2]}]
+set_property PACKAGE_PIN AB9 [get_ports {leds[3]}]
+#false_path {leds[*]} sysclk
+
+set_property IOSTANDARD LVCMOS25 [get_ports {dip_sw[*]}]
+set_property PACKAGE_PIN Y29 [get_ports {dip_sw[0]}]
+set_property PACKAGE_PIN W29 [get_ports {dip_sw[1]}]
+set_property PACKAGE_PIN AA28 [get_ports {dip_sw[2]}]
+set_property PACKAGE_PIN Y28 [get_ports {dip_sw[3]}]
+#false_path {dip_sw[*]} sysclk
+
+set_property IOSTANDARD LVCMOS25 [get_ports {gmii* phy_rst}]
+set_property PACKAGE_PIN K30 [get_ports gmii_gtx_clk]
+set_property PACKAGE_PIN M27 [get_ports gmii_tx_en]
+set_property PACKAGE_PIN N29 [get_ports gmii_tx_er]
+set_property PACKAGE_PIN N27 [get_ports {gmii_txd[0]}]
+set_property PACKAGE_PIN N25 [get_ports {gmii_txd[1]}]
+set_property PACKAGE_PIN M29 [get_ports {gmii_txd[2]}]
+set_property PACKAGE_PIN L28 [get_ports {gmii_txd[3]}]
+set_property PACKAGE_PIN J26 [get_ports {gmii_txd[4]}]
+set_property PACKAGE_PIN K26 [get_ports {gmii_txd[5]}]
+set_property PACKAGE_PIN L30 [get_ports {gmii_txd[6]}]
+set_property PACKAGE_PIN J28 [get_ports {gmii_txd[7]}]
+set_property PACKAGE_PIN U27 [get_ports gmii_rx_clk]
+set_property PACKAGE_PIN R28 [get_ports gmii_rx_dv]
+set_property PACKAGE_PIN V26 [get_ports gmii_rx_er]
+set_property PACKAGE_PIN U30 [get_ports {gmii_rxd[0]}]
+set_property PACKAGE_PIN U25 [get_ports {gmii_rxd[1]}]
+set_property PACKAGE_PIN T25 [get_ports {gmii_rxd[2]}]
+set_property PACKAGE_PIN U28 [get_ports {gmii_rxd[3]}]
+set_property PACKAGE_PIN R19 [get_ports {gmii_rxd[4]}]
+set_property PACKAGE_PIN T27 [get_ports {gmii_rxd[5]}]
+set_property PACKAGE_PIN T26 [get_ports {gmii_rxd[6]}]
+set_property PACKAGE_PIN T28 [get_ports {gmii_rxd[7]}]
+set_property PACKAGE_PIN L20 [get_ports phy_rst]
+
+
+# IPbus clock
+create_generated_clock -name ipbus_clk -source [get_pins infra/clocks/mmcm/CLKIN1] [get_pins infra/clocks/mmcm/CLKOUT3]
+
+# Other derived clocks
+create_generated_clock -name clk_aux -source [get_pins infra/clocks/mmcm/CLKIN1] [get_pins infra/clocks/mmcm/CLKOUT4]
+
+# Declare the oscillator clock, ipbus clock and aux clock as unrelated
+set_clock_groups -asynchronous -group [get_clocks sysclk] -group [get_clocks ipbus_clk] -group [get_clocks -include_generated_clocks [get_clocks clk_aux]]

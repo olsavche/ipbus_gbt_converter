@@ -70,29 +70,29 @@ set_property IOSTANDARD LVCMOS25 [get_ports SFP_TX_DISABLE]
 ##===============##
 
 # IO_L2N_T0_33
-set_property PACKAGE_PIN AB8 [get_ports GPIO_LED_0_LS]
-set_property IOSTANDARD LVCMOS15 [get_ports GPIO_LED_0_LS]
+#set_property PACKAGE_PIN AB8 [get_ports GPIO_LED_0_LS]
+#set_property IOSTANDARD LVCMOS15 [get_ports GPIO_LED_0_LS]
 # IO_L2P_T0_33
-set_property PACKAGE_PIN AA8 [get_ports GPIO_LED_1_LS]
-set_property IOSTANDARD LVCMOS15 [get_ports GPIO_LED_1_LS]
+#set_property PACKAGE_PIN AA8 [get_ports GPIO_LED_1_LS]
+#set_property IOSTANDARD LVCMOS15 [get_ports GPIO_LED_1_LS]
 # IO_L3N_T0_DQS_33
-set_property PACKAGE_PIN AC9 [get_ports GPIO_LED_2_LS]
-set_property IOSTANDARD LVCMOS15 [get_ports GPIO_LED_2_LS]
+#set_property PACKAGE_PIN AC9 [get_ports GPIO_LED_2_LS]
+#set_property IOSTANDARD LVCMOS15 [get_ports GPIO_LED_2_LS]
 # IO_L3P_T0_DQS_33
-set_property PACKAGE_PIN AB9 [get_ports GPIO_LED_3_LS]
-set_property IOSTANDARD LVCMOS15 [get_ports GPIO_LED_3_LS]
+#set_property PACKAGE_PIN AB9 [get_ports GPIO_LED_3_LS]
+#set_property IOSTANDARD LVCMOS15 [get_ports GPIO_LED_3_LS]
 # IO_25_13
 set_property PACKAGE_PIN AE26 [get_ports GPIO_LED_4_LS]
-set_property IOSTANDARD LVCMOS15 [get_ports GPIO_LED_4_LS]
+set_property IOSTANDARD LVCMOS25 [get_ports GPIO_LED_4_LS]
 # IO_0_17
 set_property PACKAGE_PIN G19 [get_ports GPIO_LED_5_LS]
-set_property IOSTANDARD LVCMOS15 [get_ports GPIO_LED_5_LS]
+set_property IOSTANDARD LVCMOS25 [get_ports GPIO_LED_5_LS]
 # IO_25_17
 set_property PACKAGE_PIN E18 [get_ports GPIO_LED_6_LS]
-set_property IOSTANDARD LVCMOS15 [get_ports GPIO_LED_6_LS]
+set_property IOSTANDARD LVCMOS25 [get_ports GPIO_LED_6_LS]
 # IO_25_18
 set_property PACKAGE_PIN F16 [get_ports GPIO_LED_7_LS]
-set_property IOSTANDARD LVCMOS15 [get_ports GPIO_LED_7_LS]
+set_property IOSTANDARD LVCMOS25 [get_ports GPIO_LED_7_LS]
 
 ##====================##
 ## SIGNALS FORWARDING ##
@@ -144,4 +144,5 @@ set_property SLEW FAST [get_ports FMC_HPC_LA05_P]
 
 ##===================================================================================================##
 ##===================================================================================================##
+
 
